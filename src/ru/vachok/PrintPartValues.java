@@ -10,11 +10,15 @@ public class PrintPartValues {
             // Проверка третьего элемента на соответствие, для корректного вывода строк
             Element valueLn = values.get(3);
             boolean isMorning = valueLn.text().contains("Утро");
+            boolean isDay = valueLn.text().contains("День");
             // Задаём кол-во строк по-умолчанию
             // Если элемент массива valueLn номер 3
             // содержит Утро - выводим только 3 первые строчки сегодняшнего дня
             if (isMorning) {
                 iterationCount = 3;
+            }
+            if (isDay) {
+                iterationCount = 2;
             }
             for (int i = 0; i < iterationCount; i++) {
                 Element valueLine = values.get(index + i);
