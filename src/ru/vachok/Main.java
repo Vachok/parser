@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static ru.vachok.PrintPartValues.printPartValues;
+
 
 public class Main {
 
@@ -45,38 +47,8 @@ public class Main {
 
     // Метод, печатающий 4 значения самой погоды.
     // Индекс - это значение, с которого нужно печатать
-    private static int printPartValues( Elements values , int index ) {
-        int iterationCount = 4;
-        if (index == 0) {
-            // Проверка третьего элемента на соответствие, для корректного вывода строк
-            Element valueLn = values.get(3);
-            boolean isMorning = valueLn.text().contains("Утро");
-            // Задаём кол-во строк по-умолчанию
-            // Если элемент массива valueLn номер 3
-            // содержит Утро - выводим только 3 первые строчки сегодняшнего дня
-            if (isMorning) {
-                iterationCount = 3;
-            }
-                for (int i = 0; i < iterationCount; i++) {
-                    Element valueLine = values.get(index + i);
-                    for (Element td : valueLine.select("td")) {
-                        System.out.print(td.text() + "    ");
-                    }
-                    System.out.println();
-                }
-            } else {
-                for (int i = 0; i < iterationCount; i++) {
-                    // Забрать элемент массива values, по-индексу
-                    // Присвоить этому имя valueLine
-                    Element valueLine = values.get(index + i);
-                    // Выделить из valueLine всё, что td
-                    for (Element td : valueLine.select("td")) {
-                        System.out.print(td.text() + "    ");
-                    }
-                    System.out.println();
-                }
-            }  return iterationCount;
-        }
+
+    //Точка вывода
     public static void main( String[] args ) throws Exception {
         Document page = getPage();
         // tableWeather - таблица самой погоды
