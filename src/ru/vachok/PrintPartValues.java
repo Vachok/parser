@@ -4,14 +4,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class PrintPartValues {
-    public static int printPartValues( Elements values , int index ) {
+
+    private static int printPartValues( Elements values , int index ) {
         int iterationCount = 4;
         if (index == 0) {
             // Проверка третьего элемента на соответствие, для корректного вывода строк
             Element valueLn = values.get(3);
             boolean isMorning = valueLn.text().contains("Утро");
             boolean isDay = valueLn.text().contains("День");
-            // Задаём кол-во строк по-умолчанию
             // Если элемент массива valueLn номер 3
             // содержит Утро - выводим только 3 первые строчки сегодняшнего дня
             if (isMorning) {
@@ -38,7 +38,7 @@ public class PrintPartValues {
                 }
                 System.out.println();
             }
-        }  return iterationCount;
+        }
+        return iterationCount;
     }
-
 }
