@@ -74,34 +74,31 @@ public class GetWeather {
         return values;
     }
 
-    public void GetWeather() {
-        int index = getVal().size();
-        int iterationCount = 4;
-        if (index == 0) {
-            Element valueLn = getVal().get(3);
-            boolean isMorning = valueLn.text().contains("Утро");
-            boolean isDay = valueLn.text().contains("День");
-            if (isMorning) {
-                iterationCount = 3;
-            }
-            if (isDay) {
-                iterationCount = 2;
-            }
+    public static String main() {
+        int valSize = getVal().size();
+        int index = 0;
+        Element valueLn = getVal().get(3);
+        Elements valueLines = getVal();
+        int iterationCount =4;
+        boolean isMorning = valueLn.text().contains("Утро");
+        boolean isDay = valueLn.text().contains("День");
+        boolean isEvening = valueLn.text().contains("Вечер");
+        if (isMorning) iterationCount = 3;
+        if (isDay) iterationCount = 1;
+        if (isEvening) iterationCount = 1;
+        if (valSize == 0) {
             for (int i = 0; i < iterationCount; i++) {
-                Element valueLine = getVal().get(index + i);
-                for (Element td : valueLine.select("td")) {
-                    System.out.println(td);
-                }
+                Elements valueTd = valueLines.get(index + i);
+                for (Element td : valueTd.select("td")) {
+                }return
             }
         } else {
             for (int i = 0; i < iterationCount; i++) {
-                Element valueLine = getVal().get(index + i);
-                // Выделить из valueLine всё, что td
-                for (Element td : valueLine.select("td")) {
-                    System.out.println(td);
+                Element valueTd = valueLines.get(index + i);
+                for (Element td : valueTd.select("td")) {
                 }
             }
         }
-    }
+    return String; }
 }
 
