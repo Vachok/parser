@@ -1,14 +1,13 @@
 package ru.vachok;
 
-import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class Main {
 
     public static void main( String[] args ) throws Exception {
-        Element values = GetWeather.printValues();
         String date = GetWeather.date();
-//        System.out.println("Погода в Санкт-Петербурге. По данным сайта pogoda.spb.ru");
-        System.out.println(values);
+//        System.out.println("Погода в Санкт-Петербурге. По данным сайта pogoda.spb.ru"
+
         System.out.println(date);
         System.out.println("Заебцом");
     }

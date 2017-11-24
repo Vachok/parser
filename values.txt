@@ -1,8 +1,1 @@
-<tr valign="top">
- <td width="80">День</td>
- <td><span title="39%">Небольшая облачность.</span><br><span title="0 мм">Без осадков.</span> </td>
- <td width="80">-3..-5</td>
- <td>763</td>
- <td>68%</td>
- <td width="70">[Ю-В]<br>2-4 м/с</td>
-</tr>
+<td><span title="99%">Пасмурно.</span><br><span title="0.2 мм">Без существенных осадков.</span> </td>

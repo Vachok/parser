@@ -12,6 +12,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GetWeather {
+    static Element tableWTH;
+
+
     /**
      * <p>Забираем документ из сети</p>
      *
@@ -36,7 +39,7 @@ public class GetWeather {
      * @return
      * @throws Exception
      */
-    private static String getDateFrom( String stringDate ) throws Exception {
+    static String getDateFrom( String stringDate ) throws Exception {
         Pattern pattern = Pattern.compile("\\d{2}\\.\\d{2}");
         Matcher matcher = pattern.matcher(stringDate);
         if (matcher.find()) {
@@ -47,7 +50,7 @@ public class GetWeather {
 
     static String date() throws Exception {
         Document page = getPage();
-        Element tableWTH = page.select("table[class=wt]").first();
+        tableWTH = page.select("table[class=wt]").first();
         Elements names = tableWTH.select("tr[class=wth]");
         String prdate = null;
         for (Element name : names) {
@@ -59,15 +62,25 @@ public class GetWeather {
 
     }
 
-    static int printPartValues( Elements values , int index) {
+
+    static Elements getVal() {
+        try {
+            tableWTH = GetWeather.getPage().select("table[class=wt]").first();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Elements values = tableWTH.select("tr[valign=top]");
+
+        return values;
+    }
+
+    public void GetWeather() {
+        int index = getVal().size();
         int iterationCount = 4;
         if (index == 0) {
-            // Проверка третьего элемента на соответствие, для корректного вывода строк
-            Element valueLn = values.get(3);
+            Element valueLn = getVal().get(3);
             boolean isMorning = valueLn.text().contains("Утро");
             boolean isDay = valueLn.text().contains("День");
-            // Если элемент массива valueLn номер 3
-            // содержит Утро - выводим только 3 первые строчки сегодняшнего дня
             if (isMorning) {
                 iterationCount = 3;
             }
@@ -75,38 +88,20 @@ public class GetWeather {
                 iterationCount = 2;
             }
             for (int i = 0; i < iterationCount; i++) {
-                Element valueLine = values.get(index + i);
+                Element valueLine = getVal().get(index + i);
                 for (Element td : valueLine.select("td")) {
-                    System.out.print(td.text() + "    ");
+                    System.out.println(td);
                 }
-                System.out.println();
             }
         } else {
             for (int i = 0; i < iterationCount; i++) {
-                // Забрать элемент массива values, по-индексу
-                // Присвоить этому имя valueLine
-                Element valueLine = values.get(index + i);
+                Element valueLine = getVal().get(index + i);
                 // Выделить из valueLine всё, что td
                 for (Element td : valueLine.select("td")) {
-                    System.out.print(td.text() + "    ");
+                    System.out.println(td);
                 }
-                System.out.println();
             }
         }
-        return iterationCount;
     }
-
-    static Element printValues() {
-        Element tableWTH = null;
-        try {
-            tableWTH = GetWeather.getPage().select("table[class=wt]").first();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-//         Elements val = tableWTH.select("")
-
-        return tableWTH;
-    }
-
 }
 
