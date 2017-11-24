@@ -3,9 +3,11 @@ package ru.vachok;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.net.MalformedURLException;
+
 public class PrintPartValues {
 
-    private static int printPartValues( Elements values , int index ) {
+     static int printPartValues( Elements values , int index) {
         int iterationCount = 4;
         if (index == 0) {
             // Проверка третьего элемента на соответствие, для корректного вывода строк
@@ -41,4 +43,16 @@ public class PrintPartValues {
         }
         return iterationCount;
     }
+
+     static Element printValues() {
+         Element tableWTH = null;
+         try {
+             tableWTH = GetWeather.getPage().select("table[class=wt]").first();
+         } catch (MalformedURLException e) {
+             e.printStackTrace();
+         }
+//         Elements val = tableWTH.select("")
+
+         return tableWTH;
+     }
 }

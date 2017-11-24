@@ -10,10 +10,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.lang.String;
 
 public class GetWeather {
-    private static Document getPage() throws MalformedURLException {
+    /**
+     * <p>Забираем документ из сети</p>
+     *
+     * @return Целевую страницу as is (page)
+     * @throws MalformedURLException http://pogoda.spb.ru/
+     */
+    static Document getPage() throws MalformedURLException {
         String url = "http://pogoda.spb.ru/";
         Document page = null;
         try {
@@ -24,6 +29,13 @@ public class GetWeather {
         return page;
     }
 
+    /**
+     * Преобразование и выборка дат
+     *
+     * @param stringDate это
+     * @return
+     * @throws Exception
+     */
     private static String getDateFrom( String stringDate ) throws Exception {
         Pattern pattern = Pattern.compile("\\d{2}\\.\\d{2}");
         Matcher matcher = pattern.matcher(stringDate);
@@ -31,9 +43,9 @@ public class GetWeather {
             return matcher.group();
         }
         throw new Exception("no date");
-        }
+    }
 
-    public static String date() throws Exception {
+    static String date() throws Exception {
         Document page = getPage();
         Element tableWTH = page.select("table[class=wt]").first();
         Elements names = tableWTH.select("tr[class=wth]");
@@ -43,6 +55,8 @@ public class GetWeather {
             prdate = getDateFrom(stdate);
         }
         return prdate;
+
+
     }
 }
 
