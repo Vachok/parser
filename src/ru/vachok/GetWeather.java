@@ -74,12 +74,12 @@ public class GetWeather {
         return values;
     }
 
-    public static String main() {
+    public static void main( String[] args ) throws Exception {
         int valSize = getVal().size();
         int index = 0;
         Element valueLn = getVal().get(3);
         Elements valueLines = getVal();
-        int iterationCount =4;
+        int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
         boolean isDay = valueLn.text().contains("День");
         boolean isEvening = valueLn.text().contains("Вечер");
@@ -88,17 +88,20 @@ public class GetWeather {
         if (isEvening) iterationCount = 1;
         if (valSize == 0) {
             for (int i = 0; i < iterationCount; i++) {
-                Elements valueTd = valueLines.get(index + i);
+                Element valueTd = valueLines.get(index + i);
                 for (Element td : valueTd.select("td")) {
-                }return
+                    System.out.println(td);
+                }
             }
         } else {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = valueLines.get(index + i);
                 for (Element td : valueTd.select("td")) {
+                    System.out.println(td);
+
                 }
             }
         }
-    return String; }
+    }
 }
 
