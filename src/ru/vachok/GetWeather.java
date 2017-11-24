@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.String;
 
-public class GetSPBWeather {
+public class GetWeather {
     private static Document getPage() throws MalformedURLException {
         String url = "http://pogoda.spb.ru/";
         Document page = null;
@@ -23,6 +23,7 @@ public class GetSPBWeather {
         }
         return page;
     }
+
     private static String getDateFrom( String stringDate ) throws Exception {
         Pattern pattern = Pattern.compile("\\d{2}\\.\\d{2}");
         Matcher matcher = pattern.matcher(stringDate);
@@ -32,11 +33,16 @@ public class GetSPBWeather {
         throw new Exception("no date");
         }
 
-    public static void main(String[] args) throws Exception {
+    public static String date() throws Exception {
         Document page = getPage();
-        Element tableWTH = page.select("table[class=wth]").first();
-        Elements names = tableWTH.select("td[id=wt]");
+        Element tableWTH = page.select("table[class=wt]").first();
+        Elements names = tableWTH.select("tr[class=wth]");
+        String prdate = null;
+        for (Element name : names) {
+            String stdate = getDateFrom(name.select("th[id=dt]").text());
+            prdate = getDateFrom(stdate);
+        }
+        return prdate;
     }
-
 }
 
