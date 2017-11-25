@@ -1,8 +1,6 @@
-package ru.vachok;
+package vachok;
 
-import org.jsoup.select.Elements;
-
-public class Main {
+class Main {
 
     public static void main( String[] args ) throws Exception {
         String date = GetWeather.date();

@@ -1,80 +1,24 @@
-package ru.vachok;
+package vachok;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GetWeather {
-    static Element tableWTH;
+/**
+ * Класс получения погоды
+ */
+class GetWeather {
+    private static Element tableWTH;
 
-
-    /**
-     * <p>Забираем документ из сети</p>
-     *
-     * @return Целевую страницу as is (page)
-     * @throws MalformedURLException http://pogoda.spb.ru/
-     */
-    static Document getPage() throws MalformedURLException {
-        String url = "http://pogoda.spb.ru/";
-        Document page = null;
-        try {
-            page = Jsoup.parse(new URL(url) , 10000);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return page;
-    }
-
-    /**
-     * Преобразование и выборка дат
-     *
-     * @param stringDate это
-     * @return
-     * @throws Exception
-     */
-    static String getDateFrom( String stringDate ) throws Exception {
-        Pattern pattern = Pattern.compile("\\d{2}\\.\\d{2}");
-        Matcher matcher = pattern.matcher(stringDate);
-        if (matcher.find()) {
-            return matcher.group();
-        }
-        throw new Exception("no date");
-    }
-
-    static String date() throws Exception {
-        Document page = getPage();
-        tableWTH = page.select("table[class=wt]").first();
-        Elements names = tableWTH.select("tr[class=wth]");
-        String prdate = null;
-        for (Element name : names) {
-            String stdate = getDateFrom(name.select("th[id=dt]").text());
-            prdate = getDateFrom(stdate);
-        }
-        return prdate;
-
-
-    }
-
-
-    static Elements getVal() {
-        try {
-            tableWTH = GetWeather.getPage().select("table[class=wt]").first();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        Elements values = tableWTH.select("tr[valign=top]");
-
-        return values;
-    }
-
-    public static void main( String[] args ) throws Exception {
+    static {
         int valSize = getVal().size();
         int index = 0;
         Element valueLn = getVal().get(3);
@@ -89,7 +33,7 @@ public class GetWeather {
         if (valSize == 0) {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = valueLines.get(index + i);
-                for (Element td : valueTd.select("td")) {
+                for (@NotNull Element td : valueTd.select("td")) {
                     System.out.println(td.text());
                 }
                 System.out.println();
@@ -97,12 +41,55 @@ public class GetWeather {
         } else {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = valueLines.get(index + i);
-                for (Element td : valueTd.select("td")) {
+                for (@NotNull Element td : valueTd.select("td")) {
                     System.out.println(td.text());
                 }
             }
-        }                System.out.println();
+        }
+        System.out.println();
 
+    }
+
+    @Nullable
+    private static Document getPage() {
+        @NotNull String url = "http://pogoda.spb.ru/";
+        @Nullable Document page = null;
+        try {
+            page = Jsoup.parse(new URL(url) , 10000);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return page;
+    }
+
+    private static String getDateFrom( @NotNull String stringDate ) throws Exception {
+        @NotNull Pattern pattern = Pattern.compile("\\d{2}\\.\\d{2}");
+        @NotNull Matcher matcher = pattern.matcher(stringDate);
+        if (matcher.find()) {
+            return matcher.group();
+        }
+        throw new Exception("no date");
+    }
+
+    @Nullable
+    static String date() throws Exception {
+        @Nullable Document page = getPage();
+        tableWTH = page.select("table[class=wt]").first();
+        Elements names = tableWTH.select("tr[class=wth]");
+        @Nullable String prdate = null;
+        for (@NotNull Element name : names) {
+            String stdate = getDateFrom(name.select("th[id=dt]").text());
+            prdate = getDateFrom(stdate);
+        }
+        return prdate;
+
+
+    }
+
+    private static Elements getVal() {
+        tableWTH = GetWeather.getPage().select("table[class=wt]").first();
+
+        return tableWTH.select("tr[valign=top]");
     }
 }
 
