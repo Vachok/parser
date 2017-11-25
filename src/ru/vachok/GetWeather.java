@@ -84,24 +84,25 @@ public class GetWeather {
         boolean isDay = valueLn.text().contains("День");
         boolean isEvening = valueLn.text().contains("Вечер");
         if (isMorning) iterationCount = 3;
-        if (isDay) iterationCount = 1;
+        if (isDay) iterationCount = 2;
         if (isEvening) iterationCount = 1;
         if (valSize == 0) {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = valueLines.get(index + i);
                 for (Element td : valueTd.select("td")) {
-                    System.out.println(td);
+                    System.out.println(td.text());
                 }
+                System.out.println();
             }
         } else {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = valueLines.get(index + i);
                 for (Element td : valueTd.select("td")) {
-                    System.out.println(td);
-
+                    System.out.println(td.text());
                 }
             }
-        }
+        }                System.out.println();
+
     }
 }
 
