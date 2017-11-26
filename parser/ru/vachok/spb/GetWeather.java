@@ -47,13 +47,12 @@ public class GetWeather {
                 }
             }
         }
-        System.out.println(date);
+         try {
+             System.out.println(date());
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
 
-        try {
-            date = date();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
      }
 
     @Nullable
@@ -80,9 +79,10 @@ public class GetWeather {
     @Nullable
     private static String date() throws Exception {
         @Nullable Document page = getPage();
-        tableWTH = page.select("table[class=wt]").first();
-        Elements names = tableWTH.select("tr[class=wth]");
+        tableWTH = page != null ? page.select("table[class=wt]").first() : null;
+        Elements names = tableWTH != null ? tableWTH.select("tr[class=wth]") : null;
         @Nullable String prdate = null;
+        assert names != null;
         for (@NotNull Element name : names) {
             String stdate = getDateFrom(name.select("th[id=dt]").text());
             prdate = getDateFrom(stdate);
