@@ -17,9 +17,9 @@ import java.util.regex.Pattern;
  */
 public class GetWeather {
     private static Element tableWTH;
-    static String date;
+    private static String date;
 
-    static {
+     public static void values() {
         int valSize = getVal().size();
         int index = 0;
         Element valueLn = getVal().get(3);
@@ -54,7 +54,7 @@ public class GetWeather {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+     }
 
     @Nullable
     private static Document getPage() {
@@ -78,7 +78,7 @@ public class GetWeather {
     }
 
     @Nullable
-    static String date() throws Exception {
+    private static String date() throws Exception {
         @Nullable Document page = getPage();
         tableWTH = page.select("table[class=wt]").first();
         Elements names = tableWTH.select("tr[class=wth]");
