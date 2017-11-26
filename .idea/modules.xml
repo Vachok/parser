@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/src/parser.iml" filepath="$PROJECT_DIR$/src/parser.iml" />
+      <module fileurl="file://E:/Google Drive/Google Диск/JetBrains/helloworld/src/GUI.iml" filepath="E:/Google Drive/Google Диск/JetBrains/helloworld/src/GUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parser/Weather.iml" filepath="$PROJECT_DIR$/parser/Weather.iml" />
     </modules>
   </component>
 </project>

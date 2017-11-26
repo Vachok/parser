@@ -1,4 +1,4 @@
-package vachok;
+package ru.vachok.spb;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,8 +15,9 @@ import java.util.regex.Pattern;
 /**
  * Класс получения погоды
  */
-class GetWeather {
+public class GetWeather {
     private static Element tableWTH;
+    static String date;
 
     static {
         int valSize = getVal().size();
@@ -46,8 +47,13 @@ class GetWeather {
                 }
             }
         }
-        System.out.println();
+        System.out.println(date);
 
+        try {
+            date = date();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Nullable
