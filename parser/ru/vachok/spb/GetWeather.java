@@ -19,7 +19,7 @@ public class GetWeather {
     private static Element tableWTH;
     private static String date;
 
-     public static void values() {
+     public static void main() {
         int valSize = getVal().size();
         int index = 0;
         Element valueLn = getVal().get(3);
