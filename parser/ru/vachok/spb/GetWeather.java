@@ -18,8 +18,8 @@ public class GetWeather {
     private static Document page = getPage();
 
     /**
-     Забираем страницу http://pogoda.spb.ru/
-     Отдаём Document с переменной page * @return
+     * Забираем страницу http://pogoda.spb.ru/
+     * Отдаём Document с переменной page * @return
      */
     private static Document getPage() {
         String url = "http://pogoda.spb.ru/";
@@ -31,23 +31,27 @@ public class GetWeather {
         }
         return page;
     }
+
     /**
-     Берёт Document page, выбирает первую таблицу table[class=wt]
-     Отдаёт массив, выбранный из table class=wt, с тэгом tr[valign=top] * @return
+     * Берёт Document page, выбирает первую таблицу table[class=wt]
+     * Отдаёт массив, выбранный из table class=wt, с тэгом tr[valign=top] * @return
      */
     private static Elements getVal() {
         tableWTH = GetWeather.page.select("table[class=wt]").first();
-        return tableWTH.select("tr[valign=top]") ;
+        return tableWTH.select("tr[valign=top]");
     }
+
     private static String getDateFrom( String stringDate ) throws Exception {
         Pattern pattern;
         pattern = Pattern.compile("\\d{2}\\.\\d{2}");
         Matcher matcher;
         matcher = pattern.matcher(stringDate);
-        if (matcher.find()) return matcher.group();
-        String nodt = "no date";
-        throw new Exception(nodt);
+        if (matcher.find()) {
+            return matcher.group();
+        }
+        throw new Exception("no date");
     }
+
     private static String dateGet() throws Exception {
         Document page = getPage();
         tableWTH = page != null ? page.select("table[class=wt]").first() : null;
@@ -57,17 +61,15 @@ public class GetWeather {
         for (Element name : names) {
             String stdate = getDateFrom(name.select("th[id=dt]").text());
             date = getDateFrom(stdate);
-        }return date;
+        }
+        return date;
     }
 
-
-
-    public static void main() {
-        int valSize = getVal().size();
+    private static void printVal() {
         Elements values = getVal();
-        String date = dateGet();
+        int valSize = values.size();
         int index = 0;
-        Element valueLn = getVal().get(3);
+        Element valueLn = values.get(3);
         int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
         boolean isDay = valueLn.text().contains("День");
@@ -79,21 +81,25 @@ public class GetWeather {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = getVal().get(index + i);
                 for (Element td : valueTd.select("td")) {
-                    System.out.println(date);
                     System.out.println(td.text());
                 }
-                System.out.println();
             }
-        } else {
+        } else
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = getVal().get(index + i);
                 for (Element td : valueTd.select("td")) {
-                    System.out.println(date);
                     System.out.println(td.text());
                 }
             }
-        }
     }
 
-}
+    public static void main() throws Exception {
+        String date = dateGet();
+        System.out.println(date);
+        printVal();
+    }
+    }
+/*
+*/
+
 
