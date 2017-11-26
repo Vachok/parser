@@ -1,0 +1,6 @@
+<!--suppress XmlUnboundNsPrefix, XmlUnboundNsPrefix, XmlUnboundNsPrefix -->
+<root>
+    <item name='javax.swing.JComponent java.util.Locale getDefaultLocale()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>
