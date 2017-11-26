@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 public class GetWeather {
     private static Element tableWTH;
     private static Document page = getPage();
+
     /**
      Забираем страницу http://pogoda.spb.ru/
      Отдаём Document с переменной page * @return
@@ -43,24 +44,20 @@ public class GetWeather {
         pattern = Pattern.compile("\\d{2}\\.\\d{2}");
         Matcher matcher;
         matcher = pattern.matcher(stringDate);
-        if (matcher.find()) {
-            return matcher.group();
-        }
-        throw new Exception("no date");
+        if (matcher.find()) return matcher.group();
+        String nodt = "no date";
+        throw new Exception(nodt);
     }
-    private static String date() throws Exception {
+    private static String dateGet() throws Exception {
         Document page = getPage();
         tableWTH = page != null ? page.select("table[class=wt]").first() : null;
         Elements names = tableWTH != null ? tableWTH.select("tr[class=wth]") : null;
-        String prdate = null;
+        String date = null;
         assert names != null;
         for (Element name : names) {
             String stdate = getDateFrom(name.select("th[id=dt]").text());
-            prdate = getDateFrom(stdate);
-        }
-        return prdate;
-
-
+            date = getDateFrom(stdate);
+        }return date;
     }
 
 
@@ -68,6 +65,7 @@ public class GetWeather {
     public static void main() {
         int valSize = getVal().size();
         Elements values = getVal();
+        String date = dateGet();
         int index = 0;
         Element valueLn = getVal().get(3);
         int iterationCount = 4;
@@ -81,6 +79,7 @@ public class GetWeather {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = getVal().get(index + i);
                 for (Element td : valueTd.select("td")) {
+                    System.out.println(date);
                     System.out.println(td.text());
                 }
                 System.out.println();
@@ -89,6 +88,7 @@ public class GetWeather {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = getVal().get(index + i);
                 for (Element td : valueTd.select("td")) {
+                    System.out.println(date);
                     System.out.println(td.text());
                 }
             }
