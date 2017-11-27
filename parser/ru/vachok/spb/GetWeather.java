@@ -29,26 +29,40 @@ public class GetWeather {
         }
         return page;
     }
-
+    /** <b>Элементы значений погоды и преобразовывает в Elements</b>
+     * @return {@code tableWTH.select("tr[valign=top]")}
+     */
     private static Elements getVal() {
         tableWTH = GetWeather.page.select("table[class=wt]").first();
         return tableWTH.select("tr[valign=top]");
     }
-
+    /** <b>Выделяет дату из <i>stringDate</i></b>
+     * @param stringDate (example) "27.11 Понедельник погода сегодня"
+     * @return 27.11
+     * @throws IOException "no date"
+     */
     private static String getDateFrom( String stringDate ) throws IOException {
         Pattern pattern;
         pattern = Pattern.compile("\\d{2}\\.\\d{2}");
         Matcher matcher;
-        matcher = pattern.matcher(stringDate);
+        matcher = pattern.matcher(stringDate); //Example ( java.util.regex.Matcher[pattern=\d{2}\.\d{2} region=0,32 lastmatch=27.11] )
         if (matcher.find()) {
             return matcher.group();
         }
         throw new IOException("no date");
     }
 
+    /**<b>Дата из массива </b>
+     *
+     * @return
+     * @throws IOException
+     */
     private static String dateGet() throws IOException {
         Document page = getPage();
         tableWTH = page != null ? page.select("table[class=wt]").first() : null;
+        /**Переменная names
+         *@value names
+         */
         Elements names = tableWTH != null ? tableWTH.select("tr[class=wth]") : null;
         String date = null;
         assert names != null;
