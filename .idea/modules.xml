@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/parser/Weather.iml" filepath="$PROJECT_DIR$/parser/Weather.iml" />
       <module fileurl="file://$PROJECT_DIR$/gui/gui.iml" filepath="$PROJECT_DIR$/gui/gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaDoc/javaDoc.iml" filepath="$PROJECT_DIR$/javaDoc/javaDoc.iml" />
     </modules>
   </component>
 </project>

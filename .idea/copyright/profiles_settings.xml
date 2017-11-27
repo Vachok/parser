@@ -1,5 +1,8 @@
 <component name="CopyrightManager">
-  <settings>
+  <settings default="Vachok">
+    <module2copyright>
+      <element module="All" copyright="Vachok" />
+    </module2copyright>
     <LanguageOptions name="HTML">
       <option name="fileTypeOverride" value="1" />
       <option name="prefixLines" value="false" />
