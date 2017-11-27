@@ -2,6 +2,10 @@
  * Vacok 2017.
  */
 
+/*
+ * Vacok 2017.
+ */
+
 package ru.vachok.spb;
 
 import org.jsoup.Jsoup;
@@ -82,6 +86,7 @@ public class GetWeather {
 // import statements
     /** <b>Печать значений погоды</b>
      * <p style="font-size:1em; color:red;">в разработке</p>
+     * Должен проверять элемент массива с индексом 3 на наличие ключевого слова, и выводить инфорацию соотв. результату
      */
     private static void printVal() {
         int index = 0; //инициализация переменной индекса массива
