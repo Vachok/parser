@@ -29,7 +29,6 @@ public class GetWeather {
         }
         return page;
     }
-
     private static Elements getVal() {
         tableWTH = GetWeather.page.select("table[class=wt]").first();
         return tableWTH.select("tr[valign=top]");
@@ -43,10 +42,13 @@ public class GetWeather {
         if (matcher.find()) {
             return matcher.group();
         }
+
         throw new IOException("no date");
     }
 
     private static String dateGet() throws IOException {
+    }
+
         Document page = getPage();
         tableWTH = page != null ? page.select("table[class=wt]").first() : null;
         Elements names = tableWTH != null ? tableWTH.select("tr[class=wth]") : null;
@@ -60,9 +62,10 @@ public class GetWeather {
     }
 
     private static void printVal() {
-        int index = 0;
+
         Elements values = getVal();
         int valSize = values.size();
+        int index = 0;
         Element valueLn = values.get(3);
         int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
@@ -87,11 +90,14 @@ public class GetWeather {
             }
     }
 
+
     public static void main() throws IOException {
+
         String date = dateGet();
         System.out.println(date);
         printVal();
     }
 }
+
 
 
