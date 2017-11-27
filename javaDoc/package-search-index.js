@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"ru.vachok.spb"}]
