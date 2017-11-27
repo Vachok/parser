@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Класс получения погоды
+ * Получение погоды в Питере http://pogoda.spb.ru/
  */
 public class GetWeather {
 
@@ -24,8 +24,9 @@ public class GetWeather {
      */
     private static Element tableWTH;
     /**
-     * Забираем страницу http://pogoda.spb.ru/
-     * Отдаём Document с переменной page * @return
+     ** Забираем страницу http://pogoda.spb.ru/
+     ** Отдаём Document с переменной
+     ** @return Document page;
      */
     private static Document getPage() {
         String url = "http://pogoda.spb.ru/";
