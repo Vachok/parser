@@ -10,17 +10,15 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Класс получения погоды
- */
+/** Получение погоды в Питере*/
 public class GetWeather {
-    private static Element tableWTH;
-    private static Document page = getPage();
 
-    /**
-     * Забираем страницу http://pogoda.spb.ru/
-     * Отдаём Document с переменной page * @return
-     */
+    /** Полученная страница http://pogoda.spb.ru*/
+    private static Document page = getPage();
+    /**Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]*/
+    private static Element tableWTH;
+    /** Забрать страницу http://pogoda.spb.ru
+     * @return {@link GetWeather#page}*/
     private static Document getPage() {
         String url = "http://pogoda.spb.ru/";
         page = null;
@@ -31,17 +29,12 @@ public class GetWeather {
         }
         return page;
     }
-
-    /**
-     * Берёт Document page, выбирает первую таблицу table[class=wt]
-     * Отдаёт массив, выбранный из table class=wt, с тэгом tr[valign=top] * @return
-     */
     private static Elements getVal() {
         tableWTH = GetWeather.page.select("table[class=wt]").first();
         return tableWTH.select("tr[valign=top]");
     }
 
-    private static String getDateFrom( String stringDate ) throws Exception {
+    private static String getDateFrom( String stringDate ) throws IOException {
         Pattern pattern;
         pattern = Pattern.compile("\\d{2}\\.\\d{2}");
         Matcher matcher;
@@ -49,10 +42,13 @@ public class GetWeather {
         if (matcher.find()) {
             return matcher.group();
         }
-        throw new Exception("no date");
+
+        throw new IOException("no date");
     }
 
-    private static String dateGet() throws Exception {
+    private static String dateGet() throws IOException {
+    }
+
         Document page = getPage();
         tableWTH = page != null ? page.select("table[class=wt]").first() : null;
         Elements names = tableWTH != null ? tableWTH.select("tr[class=wth]") : null;
@@ -66,6 +62,7 @@ public class GetWeather {
     }
 
     private static void printVal() {
+
         Elements values = getVal();
         int valSize = values.size();
         int index = 0;
@@ -93,13 +90,14 @@ public class GetWeather {
             }
     }
 
-    public static void main() throws Exception {
+
+    public static void main() throws IOException {
+
         String date = dateGet();
         System.out.println(date);
         printVal();
     }
-    }
-/*
-*/
+}
+
 
 
