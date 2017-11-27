@@ -14,9 +14,15 @@ import java.util.regex.Pattern;
  * Класс получения погоды
  */
 public class GetWeather {
-    private static Element tableWTH;
-    private static Document page = getPage();
 
+    /**
+     * Страница http://pogoda.spb.ru/
+     */
+    private static Document page = getPage();
+    /**
+     * Вбранная таблица, с тэгами table[class=wt] из документа page
+     */
+    private static Element tableWTH;
     /**
      * Забираем страницу http://pogoda.spb.ru/
      * Отдаём Document с переменной page * @return
@@ -31,16 +37,10 @@ public class GetWeather {
         }
         return page;
     }
-
-    /**
-     * Берёт Document page, выбирает первую таблицу table[class=wt]
-     * Отдаёт массив, выбранный из table class=wt, с тэгом tr[valign=top] * @return
-     */
     private static Elements getVal() {
         tableWTH = GetWeather.page.select("table[class=wt]").first();
         return tableWTH.select("tr[valign=top]");
     }
-
     private static String getDateFrom( String stringDate ) throws Exception {
         Pattern pattern;
         pattern = Pattern.compile("\\d{2}\\.\\d{2}");
@@ -51,7 +51,6 @@ public class GetWeather {
         }
         throw new Exception("no date");
     }
-
     private static String dateGet() throws Exception {
         Document page = getPage();
         tableWTH = page != null ? page.select("table[class=wt]").first() : null;
@@ -64,11 +63,10 @@ public class GetWeather {
         }
         return date;
     }
-
     private static void printVal() {
+        int index = 0;
         Elements values = getVal();
         int valSize = values.size();
-        int index = 0;
         Element valueLn = values.get(3);
         int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
@@ -92,14 +90,11 @@ public class GetWeather {
                 }
             }
     }
-
     public static void main() throws Exception {
         String date = dateGet();
         System.out.println(date);
         printVal();
     }
     }
-/*
-*/
 
 
