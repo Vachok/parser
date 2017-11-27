@@ -13,11 +13,11 @@ import java.util.regex.Pattern;
 /** Получение погоды в Питере*/
 public class GetWeather {
 
-    /** Полученная страница http://pogoda.spb.ru*/
+    /**Полученная страница http://pogoda.spb.ru*/
     private static Document page = getPage();
     /**Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]*/
     private static Element tableWTH;
-    /** Забрать страницу http://pogoda.spb.ru
+    /**Забрать страницу http://pogoda.spb.ru
      * @return {@link GetWeather#page}*/
     private static Document getPage() {
         String url = "http://pogoda.spb.ru/";
@@ -38,7 +38,7 @@ public class GetWeather {
     }
     /** <b>Выделяет дату из <i>stringDate</i></b>
      * @param stringDate (example) "27.11 Понедельник погода сегодня"
-     * @return 27.11
+     * @return java.util.regex.Matcher[pattern=\d{2}\.\d{2} region=0,32 lastmatch=27.11]
      * @throws IOException "no date"
      */
     private static String getDateFrom( String stringDate ) throws IOException {
@@ -53,16 +53,12 @@ public class GetWeather {
     }
 
     /**<b>Дата из массива </b>
-     *
-     * @return
-     * @throws IOException
-     */
+     @return <p style="font-size:1em; color:blue;">date: "01.12"(example)</p>
+     @throws IOException <p style="font-size:1em; color:blue;">no date</p>
+      */
     private static String dateGet() throws IOException {
         Document page = getPage();
         tableWTH = page != null ? page.select("table[class=wt]").first() : null;
-        /**Переменная names
-         *@value names
-         */
         Elements names = tableWTH != null ? tableWTH.select("tr[class=wth]") : null;
         String date = null;
         assert names != null;
@@ -73,6 +69,9 @@ public class GetWeather {
         return date;
     }
 
+    /** <b>Печать значений погоды</b>
+     *
+     */
     private static void printVal() {
         int index = 0;
         Elements values = getVal();
@@ -101,6 +100,9 @@ public class GetWeather {
             }
     }
 
+    /**
+     * @throws IOException no date
+     */
     public static void main() throws IOException {
         String date = dateGet();
         System.out.println(date);
