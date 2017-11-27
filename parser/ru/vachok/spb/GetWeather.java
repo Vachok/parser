@@ -1,3 +1,7 @@
+/*
+ * Vacok 2017.
+ */
+
 package ru.vachok.spb;
 
 import org.jsoup.Jsoup;
@@ -10,14 +14,21 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/** Получение погоды в Питере*/
+// import statements
+
+/**<b>Получение погоды в Питере</b>
+ * @author Vachok
+ * Из урока на www.geekbrains.ru
+ * @version 0.172711.5
+ * @since 27 ноября 2017
+ */
 public class GetWeather {
 
-    /**Полученная страница http://pogoda.spb.ru*/
+    /**<b>Полученная страница http://pogoda.spb.ru</b>*/
     private static Document page = getPage();
-    /**Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]*/
+    /**<b>Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]</b>*/
     private static Element tableWTH;
-    /**Забрать страницу http://pogoda.spb.ru
+    /**<b>Забрать страницу http://pogoda.spb.ru</b>
      * @return {@link GetWeather#page}*/
     private static Document getPage() {
         String url = "http://pogoda.spb.ru/";
@@ -30,16 +41,16 @@ public class GetWeather {
         return page;
     }
     /** <b>Элементы значений погоды и преобразовывает в Elements</b>
-     * @return {@code tableWTH.select("tr[valign=top]")}
+     * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
     private static Elements getVal() {
         tableWTH = GetWeather.page.select("table[class=wt]").first();
         return tableWTH.select("tr[valign=top]");
     }
     /** <b>Выделяет дату из <i>stringDate</i></b>
-     * @param stringDate (example) "27.11 Понедельник погода сегодня"
-     * @return java.util.regex.Matcher[pattern=\d{2}\.\d{2} region=0,32 lastmatch=27.11]
-     * @throws IOException "no date"
+     * @param stringDate <p style="font-size:1em; color:blue;">(example) "27.11 Понедельник погода сегодня"</p>
+     * @return <p style="font-size:1em; color:blue;">java.util.regex.Matcher[pattern=\d{2}\.\d{2} region=0,32 lastmatch=27.11]</p>
+     * @throws IOException <p style="font-size:1em; color:blue;">"no date"</p>
      */
     private static String getDateFrom( String stringDate ) throws IOException {
         Pattern pattern;
@@ -68,12 +79,12 @@ public class GetWeather {
         }
         return date;
     }
-
+// import statements
     /** <b>Печать значений погоды</b>
-     *
+     * <p style="font-size:1em; color:red;">в разработке</p>
      */
     private static void printVal() {
-        int index = 0;
+        int index = 0; //инициализация переменной индекса массива
         Elements values = getVal();
         int valSize = values.size();
         Element valueLn = values.get(3);
@@ -100,12 +111,18 @@ public class GetWeather {
             }
     }
 
-    /**
-     * @throws IOException no date
+    /** <p style="font-size:2em; color:red;">Out</p>
+     *  <p style="font-size:1em; color:blue;">Вывод даты
+     * @see GetWeather#dateGet() <p style="font-size:1em; color:blue;">Вывод значений</p>
+     * @see GetWeather#printVal()
+     * @throws IOException <p style="font-size:1em; color:blue;">no date</p>
      */
     public static void main() throws IOException {
         String date = dateGet();
         System.out.println(date);
         printVal();
     }
+    /**
+     * @see ru.vachok.Main
+     */
 }
