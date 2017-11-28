@@ -1,3 +1,7 @@
+/*
+ * Vacok 2017.
+ */
+
 package ru.vachok.spb;
 
 import org.jsoup.Jsoup;
@@ -69,12 +73,11 @@ public class GetWeather {
         }
         return date;
     }
-
     /**
      * @param values Колличество элементов в массиве {@link GetWeather#getVal()}
      * @param iterations Сколько раз запустить метод {@link GetWeather#main()}
      * @return /**<p style="font-size:2em; color:red;">iterations ?</p>*/
-    static int printVal( Elements values, int iterations) {
+    private static int printVal( Elements values , int iterations ) {
         int index = 0; /** @see index инициализация переменной индекса массива */
         // заменим эту переменную на values Elements valuesEl = getVal();
         Element valueLn = values.get(3); /** @see valueLn - элемент, который мы передаём на проверку (Утро / День / Вечер) */
@@ -99,18 +102,19 @@ public class GetWeather {
                 for (Element td : valueTd.select("td")) {
                     String value = td.text();
                     System.out.println(value);
-                }
-            }return iterations; /**<p style="font-size:2em; color:red;">iterations ?</p>*/
+                } return iterationCount;
+            }
+            int ind = iterationCount + index;
+            return iterations; /**<p style="font-size:2em; color:red;">iterations ?</p>*/
     }
-
     /** <p style="font-size:2em; color:red;">Out</p>
      *  <p style="font-size:1em; color:blue;">Вывод даты
      * @see GetWeather#dateGet() <p style="font-size:1em; color:blue;">Вывод значений</p>
      * @see GetWeather#printVal(Elements, int)
      * @throws IOException <p style="font-size:1em; color:blue;">no date</p>
      */
-    public static void main() throws IOException {
-        int i = 1;
+    public static void main(int i) throws IOException {
+
         printVal(getVal(), 1); /**@see {@code}*/
         String date = dateGet();
         System.out.println(date);
