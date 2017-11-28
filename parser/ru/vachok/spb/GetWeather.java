@@ -77,28 +77,28 @@ public class GetWeather {
         }
         return date;
     }
-    /** <b>Печать значений погоды</b>
-     * <p style="font-size:1em; color:red;">в разработке</p>
-     * Должен проверять элемент массива с индексом 3 на наличие ключевого слова, и выводить инфорацию соотв. результату
-     */
-    static int printVal( Elements values, int ind) {
-        int index = 0; //инициализация переменной индекса массива
-        Elements valuesEl = getVal();
-        int valSize = valuesEl.size();
-        Element valueLn = valuesEl.get(3);
-        int iterationCount = 4;
+
+    /**
+     * @param values Колличество элементов в массиве {@link GetWeather#getVal()}
+     * @param iterations Сколько раз запустить метод {@link GetWeather#main()}
+     * @return /**<p style="font-size:2em; color:red;">iterations ?</p>*/
+    static int printVal( Elements values, int iterations) {
+        int index = 0; /** @see index инициализация переменной индекса массива */
+        // заменим эту переменную на values Elements valuesEl = getVal();
+        Element valueLn = values.get(3); /** @see valueLn - элемент, который мы передаём на проверку (Утро / День / Вечер) */
+        int iterationCount = 4; /**@see iterationCount - это то, сколько раз пройтись по */
         boolean isMorning = valueLn.text().contains("Утро");
         boolean isDay = valueLn.text().contains("День");
         boolean isEvening = valueLn.text().contains("Вечер");
         if (isMorning) iterationCount = 3;
         if (isDay) iterationCount = 2;
         if (isEvening) iterationCount = 1;
-        if (valSize == 0) {
-            for (int i = 0; i < iterationCount; i++) {
-                Element valueTd = getVal().get(index + i);
-                for (Element td : valueTd.select("td")) {
-                    String value = td.text();
-                    System.out.println(value);
+        if (index == 0) { /** @see {@link index} = 0*/
+            for (int i = 0; i < iterationCount; i++) {  /**@see i переменная для подсчёта шагов*/
+                Element valueTd = values.get(index + i); /** @see valueTd - элемент массива {@link values} , с индексом {@link index} + {@link i} */
+                for (Element td : valueTd.select("td")) { /**@see td - это таблицы с тэгом "<td></td>" из {@link valueTd}*/
+                     // уберём лишнее String value = td.text();
+                     System.out.println(td.text()); /**@see td.text - текст из {@link td} , который содержит нужные нам значения!*/
                 }
             }
         } else
@@ -108,17 +108,18 @@ public class GetWeather {
                     String value = td.text();
                     System.out.println(value);
                 }
-            }return ind;
+            }return iterations; /**<p style="font-size:2em; color:red;">iterations ?</p>*/
     }
 
     /** <p style="font-size:2em; color:red;">Out</p>
      *  <p style="font-size:1em; color:blue;">Вывод даты
      * @see GetWeather#dateGet() <p style="font-size:1em; color:blue;">Вывод значений</p>
-     * @see GetWeather#printVal()
+     * @see GetWeather#printVal(Elements, int)
      * @throws IOException <p style="font-size:1em; color:blue;">no date</p>
      */
     public static void main() throws IOException {
-        printVal(getVal(), 100);
+        int i = 1;
+        printVal(getVal(), 1); /**@see {@code}*/
         String date = dateGet();
         System.out.println(date);
 
