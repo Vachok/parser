@@ -12,22 +12,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-// import statements
-
 /**<b>Получение погоды в Питере</b>
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.172711.5
- * @since 27 ноября 2017
+ * @version 0.172711.1
+ * @since 28 ноября 2017
  */
 public class GetWeather {
-
     /**<b>Полученная страница http://pogoda.spb.ru</b>*/
     private static Document page = getPage();
     /**<b>Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]</b>*/
@@ -66,7 +61,6 @@ public class GetWeather {
         }
         throw new IOException("no date");
     }
-
     /**<b>Дата из массива </b>
      @return <p style="font-size:1em; color:blue;">date: "01.12"(example)</p>
      @throws IOException <p style="font-size:1em; color:blue;">no date</p>
@@ -83,16 +77,15 @@ public class GetWeather {
         }
         return date;
     }
-// import statements
     /** <b>Печать значений погоды</b>
      * <p style="font-size:1em; color:red;">в разработке</p>
      * Должен проверять элемент массива с индексом 3 на наличие ключевого слова, и выводить инфорацию соотв. результату
      */
-    private static void printVal() {
+    static int printVal( Elements values, int ind) {
         int index = 0; //инициализация переменной индекса массива
-        Elements values = getVal();
-        int valSize = values.size();
-        Element valueLn = values.get(3);
+        Elements valuesEl = getVal();
+        int valSize = valuesEl.size();
+        Element valueLn = valuesEl.get(3);
         int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
         boolean isDay = valueLn.text().contains("День");
@@ -104,16 +97,18 @@ public class GetWeather {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = getVal().get(index + i);
                 for (Element td : valueTd.select("td")) {
-                    System.out.println(td.text());
+                    String value = td.text();
+                    System.out.println(value);
                 }
             }
         } else
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = getVal().get(index + i);
                 for (Element td : valueTd.select("td")) {
-                    System.out.println(td.text());
+                    String value = td.text();
+                    System.out.println(value);
                 }
-            }
+            }return ind;
     }
 
     /** <p style="font-size:2em; color:red;">Out</p>
@@ -123,9 +118,10 @@ public class GetWeather {
      * @throws IOException <p style="font-size:1em; color:blue;">no date</p>
      */
     public static void main() throws IOException {
+        printVal(getVal(), 100);
         String date = dateGet();
         System.out.println(date);
-        printVal();
+
     }
     /**
      * @see ru.vachok.Main
