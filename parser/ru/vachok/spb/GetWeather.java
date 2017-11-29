@@ -81,7 +81,7 @@ public class GetWeather {
      * @param values Колличество элементов в массиве {@link GetWeather#getVal()}
      * @param iterations Сколько раз запустить метод ??
      * @return /**<p style="font-size:2em; color:red;">iterations ?</p>*/
-    private static int printVal( Elements values , int iterations ) {
+    private static int printVal( Elements values , int iterations) {
         int index = 0;
         // заменим эту переменную на values Elements valuesEl = getVal();
         Element valueLn = values.get(3);
@@ -108,7 +108,7 @@ public class GetWeather {
                     System.out.println(value);
                 } return iterationCount;
             }
-            return iterations; /**iterations ?</p>*/
+            return iterations;
     }
     /** <p style="font-size:2em; color:red;">Out</p>
      *  <p style="font-size:1em; color:blue;">Вывод даты
@@ -117,10 +117,9 @@ public class GetWeather {
      * @throws IOException <p style="font-size:1em; color:blue;">no date</p>
      */
     public static void main() throws IOException {
-        int i;
-        printVal(getVal(),1); /**@see {@code}*/
         String date = dateGet();
         System.out.println(date);
+        printVal(Elements , iterations);
 
     }
 }
