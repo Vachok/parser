@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**<b>Получение погоды в Питере</b>
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.171129.1
+ * @version 0.171129.2
  * @since 29 ноября 2017
  */
 public class GetWeather {
@@ -19,6 +19,8 @@ public class GetWeather {
     private static Document page = getPage();
     /**<b>Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]</b>*/
     private static Element tableWTH;
+    private static int iter;
+
     /**<b>Забрать страницу http://pogoda.spb.ru</b>
      * @return {@link GetWeather#page}*/
     private static Document getPage() {
@@ -78,25 +80,26 @@ public class GetWeather {
      * <b>valueTd</b> - элемент массива <b>values</b> , с индексом <b>index</b> +  <b>i</b>;
      * <b>td</b> - это таблицы с тэгом <b>td</b> из <b>valueTd</b>;
      * <b>td.text</b> - текст из <b>td</b> , который содержит нужные нам значения!</p>
+     * <p>values 19 iter 4 (число из вызывающего метода. Его можно засунуть в метод, как переменную)</p>
      * @param values Колличество элементов в массиве {@link GetWeather#getVal()}
-     * @param iterations Сколько раз запустить метод ??
-     * @return /**<p style="font-size:2em; color:red;">iterations ?</p>*/
-    private static int printVal( Elements values , int iterations) {
+     * @param iter число из вызывающего метода. Его можно засунуть в метод, как переменную.
+     *             В данном случае его назначает {@link GetWeather#main}.
+     *             @since 0.171129.2
+     * @return <b style="font-size:1em; color:red;">что отдавать?</b>*/
+    private static int printVal( Elements values , int iter) {
         int index = 0;
-        // заменим эту переменную на values Elements valuesEl = getVal();
-        Element valueLn = values.get(3);
+        Element valueLn = values.get(3); // Табл. погоды, элемент индекс 3 = Утро
         int iterationCount = 4;
-        boolean isMorning = valueLn.text().contains("Утро");
+        boolean isMorning = valueLn.text().contains("Утро"); //=
         boolean isDay = valueLn.text().contains("День");
         boolean isEvening = valueLn.text().contains("Вечер");
         if (isMorning) iterationCount = 3;
         if (isDay) iterationCount = 2;
         if (isEvening) iterationCount = 1;
-        if (index == 0) {
+        if (index == 0) { //Если индекс 0, что верно ВСЕГДА(!), то
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = values.get(index + i);
                 for (Element td : valueTd.select("td")) {
-                     // уберём лишнее String value = td.text();
                      System.out.println(td.text());
                 }
             }
@@ -104,22 +107,22 @@ public class GetWeather {
             for (int i = 0; i < iterationCount; i++) {
                 Element valueTd = getVal().get(index + i);
                 for (Element td : valueTd.select("td")) {
-                    String value = td.text();
-                    System.out.println(value);
+                    System.out.println(td.text());
                 } return iterationCount;
             }
-            return iterations;
+        return 0;
     }
     /** <p style="font-size:2em; color:red;">Out</p>
-     *  <p style="font-size:1em; color:blue;">Вывод даты
-     * @see GetWeather#dateGet() <p style="font-size:1em; color:blue;">Вывод значений</p>
-     * @see GetWeather#printVal(Elements, int)
-     * @throws IOException <p style="font-size:1em; color:blue;">no date</p>
+     * @see GetWeather#dateGet() <p style="font-size:1em; color:blue;">Вывод даты</p>
+     * @see GetWeather#getVal() <p style="font-size:1em; color:blue;">Элементы</p>
+     * @see GetWeather#printVal(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
+     * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
+     * @since 0.171129.2
      */
     public static void main() throws IOException {
+        printVal(getVal(),4);
         String date = dateGet();
         System.out.println(date);
-        printVal(Elements , iterations);
 
     }
 }
