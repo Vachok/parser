@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"ru.vachok"},{"l":"ru.vachok.spb"}]
+packageSearchIndex = [{"l":"ru.vachok"},{"l":"ru.vachok.gui"},{"l":"ru.vachok.spb"}]
