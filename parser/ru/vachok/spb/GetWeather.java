@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 /**<b>Получение погоды в Питере</b>
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.172711.1
- * @since 28 ноября 2017
+ * @version 0.171129.1
+ * @since 29 ноября 2017
  */
 public class GetWeather {
     /**<b>Полученная страница http://pogoda.spb.ru</b>*/
@@ -69,27 +69,35 @@ public class GetWeather {
         }
         return date;
     }
-    /**
+    /** <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
+     * <p><b>index</b> инициализация переменной индекса массива;
+     * <b>valueLn</b> - элемент, который мы передаём на проверку (Утро / День / Вечер);
+     * <b>iterationCount</b> - это то, сколько раз пройтись по;
+     * <b>index</b> = 0;
+     * <b>i</b> переменная для подсчёта шагов;
+     * <b>valueTd</b> - элемент массива <b>values</b> , с индексом <b>index</b> +  <b>i</b>;
+     * <b>td</b> - это таблицы с тэгом <b>td</b> из <b>valueTd</b>;
+     * <b>td.text</b> - текст из <b>td</b> , который содержит нужные нам значения!</p>
      * @param values Колличество элементов в массиве {@link GetWeather#getVal()}
-     * @param iterations Сколько раз запустить метод {@link GetWeather#main()}
+     * @param iterations Сколько раз запустить метод ??
      * @return /**<p style="font-size:2em; color:red;">iterations ?</p>*/
     private static int printVal( Elements values , int iterations ) {
-        int index = 0; /** @see index инициализация переменной индекса массива */
+        int index = 0;
         // заменим эту переменную на values Elements valuesEl = getVal();
-        Element valueLn = values.get(3); /** @see valueLn - элемент, который мы передаём на проверку (Утро / День / Вечер) */
-        int iterationCount = 4; /**@see iterationCount - это то, сколько раз пройтись по */
+        Element valueLn = values.get(3);
+        int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
         boolean isDay = valueLn.text().contains("День");
         boolean isEvening = valueLn.text().contains("Вечер");
         if (isMorning) iterationCount = 3;
         if (isDay) iterationCount = 2;
         if (isEvening) iterationCount = 1;
-        if (index == 0) { /** @see {@link index} = 0*/
-            for (int i = 0; i < iterationCount; i++) {  /**@see i переменная для подсчёта шагов*/
-                Element valueTd = values.get(index + i); /** @see valueTd - элемент массива {@link values} , с индексом {@link index} + {@link i} */
-                for (Element td : valueTd.select("td")) { /**@see td - это таблицы с тэгом "<td></td>" из {@link valueTd}*/
+        if (index == 0) {
+            for (int i = 0; i < iterationCount; i++) {
+                Element valueTd = values.get(index + i);
+                for (Element td : valueTd.select("td")) {
                      // уберём лишнее String value = td.text();
-                     System.out.println(td.text()); /**@see td.text - текст из {@link td} , который содержит нужные нам значения!*/
+                     System.out.println(td.text());
                 }
             }
         } else
@@ -100,8 +108,7 @@ public class GetWeather {
                     System.out.println(value);
                 } return iterationCount;
             }
-            int ind = iterationCount + index;
-            return iterations; /**<p style="font-size:2em; color:red;">iterations ?</p>*/
+            return iterations; /**iterations ?</p>*/
     }
     /** <p style="font-size:2em; color:red;">Out</p>
      *  <p style="font-size:1em; color:blue;">Вывод даты
@@ -109,14 +116,11 @@ public class GetWeather {
      * @see GetWeather#printVal(Elements, int)
      * @throws IOException <p style="font-size:1em; color:blue;">no date</p>
      */
-    public static void main(int i) throws IOException {
-
-        printVal(getVal(), 1); /**@see {@code}*/
+    public static void main() throws IOException {
+        int i;
+        printVal(getVal(),1); /**@see {@code}*/
         String date = dateGet();
         System.out.println(date);
 
     }
-    /**
-     * @see ru.vachok.Main
-     */
 }
