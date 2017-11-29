@@ -11,14 +11,15 @@ import java.util.regex.Pattern;
 /**<b>Получение погоды в Питере</b>
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.171129.4
- * @since 29 ноября 2017
+ * @version 0.171130.1
+ * @since 30 ноября 2017
  */
 public class GetWeather {
     /**<b>Полученная страница http://pogoda.spb.ru</b>*/
     private static Document page = getPage();
     /**<b>Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]</b>*/
     private static Element tableWTH;
+
     /**<b>Забрать страницу http://pogoda.spb.ru</b>
      * @return {@link GetWeather#page}*/
     private static Document getPage() {
@@ -98,39 +99,38 @@ public class GetWeather {
      * @param values кидаем в метод массив отобранный из {@link GetWeather#tableWTH}.
      * @param index индекс элемента из массива values <p>В данном случае его назначает {@link GetWeather#main}.</p>
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
-     * @since Метод за версией 0.171129.4*/
+     * @since Метод за версией 0.171130.1*/
     private static int printVal( Elements values , int index) {
         Element valueLn = values.get(3); // берем элемент 3 из полученного массива
-        int i = 0;
         for (Element value : values.next()) {
-                int iterationCount = 4;
-                boolean isMorning = valueLn.text().contains("Утро");
-                boolean isDay = valueLn.text().contains("День");
-                boolean isEvening = valueLn.text().contains("Вечер");
-                if (isMorning) iterationCount = 3;
-                if (isDay) iterationCount = 2;
-                if (isEvening) iterationCount = 1;
-                if (index == 0) {
-                    Element elementTds = value;
-                    for (Element elementTd : elementTds.select("td")) {
-                        System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
-                        System.out.println();
-                    }
-                    return iterationCount;
-                } else
-                    for (int a = 0; a < iterationCount; a++) {
-                        Element elementTds = getVal().get(index + a);
-                        for (Element elementTd : elementTds.select("td")) { // вывести содержимое всех <elementTd> из элемента elementTds
-                            System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
-                            System.out.println();
+            int iterationCount = 4;
+            boolean isMorning = valueLn.text().contains("Утро");
+            boolean isDay = valueLn.text().contains("День");
+            boolean isEvening = valueLn.text().contains("Вечер");
+            if (isMorning) iterationCount = 3;
+            if (isDay) iterationCount = 2;
+            if (isEvening) iterationCount = 1;
+            if (index == 0) {
+                for (int a = 0; a < iterationCount; a++)
+                for (Element elementTd : value.select("td")) {
+                    System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
+                    System.out.println();
+                    System.out.println("iterationCount = " + iterationCount);
+                    System.out.println("Элемент 3 - " + valueLn);
+                    System.out.println(" = > ТЕКСТ из элемента массива  = " + valueLn.text());
+                }
+            } else
+                for (int a = 0; a < iterationCount; a++) {
+                for (Element elementTd : value.select("td")) {// вывести содержимое всех <elementTd> из элемента elementTds
+                    System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
+                    System.out.println();
+                    System.out.println("iterationCount = " + iterationCount);
+                    System.out.println("Элемент 3 - " + valueLn);
+                    System.out.println(" = > ТЕКСТ из элемента массива  = " + valueLn.text());
                         }
-                        System.out.println("iterationCount = " + iterationCount);
-                        System.out.println("Элемент 3 - " + valueLn);
-                        System.out.println(" = > ТЕКСТ из элемента массива  = " + valueLn.text());
                     }
-                return iterationCount;
-
-            }
+        }
+        int i = valueLn.elementSiblingIndex();
         return i;
     }
 }
