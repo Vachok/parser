@@ -19,8 +19,6 @@ public class GetWeather {
     private static Document page = getPage();
     /**<b>Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]</b>*/
     private static Element tableWTH;
-    private static int iter;
-
     /**<b>Забрать страницу http://pogoda.spb.ru</b>
      * @return {@link GetWeather#page}*/
     private static Document getPage() {
