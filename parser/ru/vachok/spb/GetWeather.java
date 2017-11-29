@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**<b>Получение погоды в Питере</b>
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.171129.3
+ * @version 0.171129.4
  * @since 29 ноября 2017
  */
 public class GetWeather {
@@ -77,7 +77,7 @@ public class GetWeather {
      * @see GetWeather#printVal(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
      * @see GetWeather#tableWTH
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
-     * @since 0.171129.3
+     * @since Метод за версией 0.171129.3
      */
     public static void main() throws IOException {
         int counter =  2;
@@ -98,35 +98,39 @@ public class GetWeather {
      * @param values кидаем в метод массив отобранный из {@link GetWeather#tableWTH}.
      * @param index индекс элемента из массива values <p>В данном случае его назначает {@link GetWeather#main}.</p>
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
-     * @since 0.171129.3*/
+     * @since Метод за версией 0.171129.4*/
     private static int printVal( Elements values , int index) {
         Element valueLn = values.get(3); // берем элемент 3 из полученного массива
-        int iterationCount = 4;
-        boolean isMorning = valueLn.text().contains("Утро");
-        boolean isDay = valueLn.text().contains("День");
-        boolean isEvening = valueLn.text().contains("Вечер");
-        if (isMorning) iterationCount = 3;
-        if (isDay) iterationCount = 2;
-        if (isEvening) iterationCount = 1;
-        if (index == 0) {
-            for (int i = 0; i < iterationCount; i++) {
-                Element elementTds = values.get(index + i);
-                for (Element elementTd : elementTds.select("td")) {
-                    System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
-                    System.out.println();
-                }System.out.println("Мы попали в if iterationCount = " + iterationCount);
+        int i = 0;
+        for (Element value : values.next()) {
+                int iterationCount = 4;
+                boolean isMorning = valueLn.text().contains("Утро");
+                boolean isDay = valueLn.text().contains("День");
+                boolean isEvening = valueLn.text().contains("Вечер");
+                if (isMorning) iterationCount = 3;
+                if (isDay) iterationCount = 2;
+                if (isEvening) iterationCount = 1;
+                if (index == 0) {
+                    Element elementTds = value;
+                    for (Element elementTd : elementTds.select("td")) {
+                        System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
+                        System.out.println();
+                    }
+                    return iterationCount;
+                } else
+                    for (int a = 0; a < iterationCount; a++) {
+                        Element elementTds = getVal().get(index + a);
+                        for (Element elementTd : elementTds.select("td")) { // вывести содержимое всех <elementTd> из элемента elementTds
+                            System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
+                            System.out.println();
+                        }
+                        System.out.println("iterationCount = " + iterationCount);
+                        System.out.println("Элемент 3 - " + valueLn);
+                        System.out.println(" = > ТЕКСТ из элемента массива  = " + valueLn.text());
+                    }
+                return iterationCount;
+
             }
-        } else
-            for (int i = 0; i < iterationCount; i++) {
-                Element elementTds = getVal().get(index + i);
-                for (Element elementTd : elementTds.select("td")) { // вывести содержимое всех <elementTd> из элемента elementTds
-                    System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
-                    System.out.println();
-                }
-                System.out.println("Мы попали в else. iterationCount = " + iterationCount);
-                System.out.println(" = > valueLn содержит Утро");
-                System.out.println();
-        }
-        return iterationCount;
+        return i;
     }
 }
