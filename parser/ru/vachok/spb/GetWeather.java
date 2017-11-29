@@ -1,7 +1,3 @@
-/*
- * Vacok 2017.
- */
-
 package ru.vachok.spb;
 
 import org.jsoup.Jsoup;
