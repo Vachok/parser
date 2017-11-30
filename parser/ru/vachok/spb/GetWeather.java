@@ -89,12 +89,12 @@ class GetWeather {
      * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
      * @since Метод за версией 0.171129.3
      */
-    static void main(){ //throws IOException {
-        int index = 1 + 9;
+    static void main(){
+        int i = getVal().size();
+        int index = 1 + i;
         Elements values = getVal();
         showSPBvalues(values, index);
     }
-
     /**
      * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
      * <p><b>index</b> инициализация переменной индекса массива;
@@ -112,7 +112,7 @@ class GetWeather {
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
      * @since Метод за версией 0.171130.2
      */
-    private static void showSPBvalues( Elements values , int index ) {
+    private static int showSPBvalues( Elements values , int index ) {
         Element valueLn = values.get(3); // берем элемент 3 из полученного массива
         int chandedIndex = values.size();
             int iterationCount = 4;
@@ -137,6 +137,7 @@ class GetWeather {
                     }
                 }
             }
-        }
+        return chandedIndex;
+    }
 
 }
