@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**<b>Получение погоды в Питере</b>
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.171130.1
+ * @version 0.171130.2
  * @since 30 ноября 2017
  */
 public class GetWeather {
@@ -19,7 +19,7 @@ public class GetWeather {
     private static Document page = getPage();
     /**<b>Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]</b>*/
     private static Element tableWTH;
-
+    private static int chandedIndex;
     /**<b>Забрать страницу http://pogoda.spb.ru</b>
      * @return {@link GetWeather#page}*/
     private static Document getPage() {
@@ -81,8 +81,7 @@ public class GetWeather {
      * @since Метод за версией 0.171129.3
      */
     public static void main() throws IOException {
-        int counter =  2;
-        printVal(getVal(), counter); // вызов метода печати, и передача ему массива элементов
+        printVal(getVal(), chandedIndex); // вызов метода печати, и передача ему массива элементов
         String date = dateGet();
         System.out.println(date);
     }
@@ -99,10 +98,11 @@ public class GetWeather {
      * @param values кидаем в метод массив отобранный из {@link GetWeather#tableWTH}.
      * @param index индекс элемента из массива values <p>В данном случае его назначает {@link GetWeather#main}.</p>
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
-     * @since Метод за версией 0.171130.1*/
+     * @since Метод за версией 0.171130.2*/
     private static int printVal( Elements values , int index) {
         Element valueLn = values.get(3); // берем элемент 3 из полученного массива
-        for (Element value : values.next()) {
+        int chandedIndex = values.size() - index;
+        for (Element elementIndexed : values) {
             int iterationCount = 4;
             boolean isMorning = valueLn.text().contains("Утро");
             boolean isDay = valueLn.text().contains("День");
@@ -110,27 +110,20 @@ public class GetWeather {
             if (isMorning) iterationCount = 3;
             if (isDay) iterationCount = 2;
             if (isEvening) iterationCount = 1;
-            if (index == 0) {
-                for (int a = 0; a < iterationCount; a++)
-                for (Element elementTd : value.select("td")) {
-                    System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
-                    System.out.println();
-                    System.out.println("iterationCount = " + iterationCount);
-                    System.out.println("Элемент 3 - " + valueLn);
-                    System.out.println(" = > ТЕКСТ из элемента массива  = " + valueLn.text());
-                }
-            } else
+            if (iterationCount == 4) {
                 for (int a = 0; a < iterationCount; a++) {
-                for (Element elementTd : value.select("td")) {// вывести содержимое всех <elementTd> из элемента elementTds
-                    System.out.print("td из элемента. Индекс " + elementTd.elementSiblingIndex() + "::::::::" + elementTd.text()); // в виде обычного текста
-                    System.out.println();
-                    System.out.println("iterationCount = " + iterationCount);
-                    System.out.println("Элемент 3 - " + valueLn);
-                    System.out.println(" = > ТЕКСТ из элемента массива  = " + valueLn.text());
-                        }
+                    for (Element elementTd : elementIndexed.select("td")) {
+                        System.out.println(elementTd.text());
                     }
-        }
-        int i = valueLn.elementSiblingIndex();
-        return i;
+                }
+            }
+            else {
+                for (int a = 0; a < iterationCount; a++) {
+                    for (Element elementTd : elementIndexed.select("td")) {
+                        System.out.println(elementTd.text());
+                    }
+                }
+            }
+        } return chandedIndex;
     }
 }
