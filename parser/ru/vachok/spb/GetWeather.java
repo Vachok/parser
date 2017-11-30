@@ -67,7 +67,7 @@ class GetWeather {
      * @return <p style="font-size:1em; color:blue;">date: "01.12"(example)</p>
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
-    private static String dateGet() throws IOException {
+     static String dateGet() throws IOException {
         Elements names = getVal() != null ? tableTrVtop.select("tr[class=wth]") : null;
         String date = null;
         assert names != null;
@@ -87,7 +87,8 @@ class GetWeather {
      * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
      * @since Метод за версией 0.171129.3
      */
-    static void main(){
+    static void main()throws IOException{
+        System.out.println(dateGet());
         int index = (4 + 6);
         Elements values = getVal();
         showSPBvalues(values, index);
