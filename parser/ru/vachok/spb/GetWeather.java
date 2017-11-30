@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  *
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.171130.5
+ * @version 0.171130.6
  * @since 30 ноября 2017
  */
 class GetWeather {
@@ -94,7 +94,6 @@ class GetWeather {
         Elements values = getVal();
         showSPBvalues(values, index);
     }
-//        throw new IOException("Sorry, ERRRRRRRRRRR");
 
     /**
      * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
@@ -116,7 +115,6 @@ class GetWeather {
     private static void showSPBvalues( Elements values , int index ) {
         Element valueLn = values.get(3); // берем элемент 3 из полученного массива
         int chandedIndex = values.size();
-        for (Element elementIndexed : values) {
             int iterationCount = 4;
             boolean isMorning = valueLn.text().contains("Утро");
             boolean isDay = valueLn.text().contains("День");
@@ -125,18 +123,20 @@ class GetWeather {
             if (isDay) iterationCount = 2;
             if (isEvening) iterationCount = 1;
             if (iterationCount == 4) {
+                for (Element elementIndexed : values){
                 for (int a = 0; a < iterationCount; a++) {
                     for (Element elementTd : elementIndexed.select("td")) {
-                        System.out.println(elementTd.text());
+                        System.out.println(elementTd.text());}
                     }
                 }
             } else {
-                for (int a = 0; a < iterationCount; a++) {
+                for (Element elementIndexed : values){
+                    for (int a = 0; a < iterationCount; a++) {
                     for (Element elementTd : elementIndexed.select("td")) {
-                        System.out.println(elementTd.text());
+                        System.out.println(elementTd.text());}
                     }
                 }
             }
         }
-    }
+
 }
