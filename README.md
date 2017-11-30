@@ -1,5 +1,3 @@
-# parser
-weather parser from weather.spb.ru
 Тренирока на базе урока https://youtu.be/sZgXUK5L3Ss
 
 Для работы нужен org.jsoup
