@@ -4,8 +4,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,25 +19,29 @@ import java.util.regex.Pattern;
  * @since 30 ноября 2017
  */
 class GetWeather {
-    private static Document page = null;
+    private static Elements tableTrVtop;
+    private static Document page = getPage();
 
-    /**<b>Для получения кода страницы</b>
+    /**
+     * <b>Для получения кода страницы</b>
      */
-    private static Document getPage() throws IOException {
+    private static Document getPage() {
         String typedUrl = "http://pogoda.spb.ru";
+        Document page = null;
         try {
-            Jsoup.parse(new URL(typedUrl) , 10000);
+            page = Jsoup.parse(new URL(typedUrl) , 10000);
         } catch (IOException e) {
             e.printStackTrace();
-        } throw new IOException("no date");
+        }
+        return page;
     }
-    private static Element tableWTH = page != null ? page.select("table[class=wt]").first() : null;
-
     /**<b>Сборщик</b>
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
-    private static Elements getVal() {
-        return tableWTH.select("tr[valign=top]");
+    private static Elements getVal() throws MalformedURLException {
+         Element tablewtFirst = getPage().select("table[class=wt]").first();
+         Elements tableTrVtop = tablewtFirst.select("tr[valign=top]");
+        return tableTrVtop;
     }
 
     /**
@@ -66,8 +70,7 @@ class GetWeather {
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
     private static String dateGet() throws IOException {
-        Document page = getPage();
-        Elements names = tableWTH != null ? tableWTH.select("tr[class=wth]") : null;
+        Elements names = getVal() != null ? tableTrVtop.select("tr[class=wth]") : null;
         String date = null;
         assert names != null;
         for (Element name : names) {
@@ -84,10 +87,9 @@ class GetWeather {
      * @see GetWeather#dateGet() <p style="font-size:1em; color:blue;">Вывод даты</p>
      * @see GetWeather#getVal() <p style="font-size:1em; color:blue;">Элементы</p>
      * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
-     * @see GetWeather#tableWTH
      * @since Метод за версией 0.171129.3
      */
-    public static void main() throws IOException {
+    static void main() throws IOException {
         int index = 1 + 9;
         Elements values = getVal();
         showSPBvalues(values, index);
@@ -106,7 +108,7 @@ class GetWeather {
      * <b>td.text</b> - текст из <b>td</b> , который содержит нужные нам значения!</p>
      * <p><i>values 19 iter 4</i> (число из вызывающего метода. Его можно засунуть в метод, как переменную)</p>
      *
-     * @param values кидаем в метод массив отобранный из {@link GetWeather#tableWTH}.
+     * @param values кидаем в метод массив отобранный из.
      * @param index  индекс элемента из массива values
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
      * @since Метод за версией 0.171130.2
