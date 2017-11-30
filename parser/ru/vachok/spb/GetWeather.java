@@ -15,43 +15,27 @@ import java.util.regex.Pattern;
  *
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.171130.2
+ * @version 0.171130.4
  * @since 30 ноября 2017
  */
 public class GetWeather {
-    /**
-     * <b>Полученная страница http://pogoda.spb.ru</b>
-     */
-    private static Document page = getPage();
-    /**
-     * <b>Выбранная таблица из {@link GetWeather#page}, с тэгами table[class=wt]</b>
-     */
-    private static Element tableWTH;
-
-    /**
-     * <b>Забрать страницу http://pogoda.spb.ru</b>
-     *
-     * @return {@link GetWeather#page}
-     */
-    private static Document getPage() {
-        String url = "http://pogoda.spb.ru/";
-        page = null;
+    /**<b>Для получения кода страницы</b>
+     *@return */
+    private static Document getPage(String url) {
+        String typedUrl = url;
         try {
-            page = Jsoup.parse(new URL(url) , 10000);
+            Jsoup.parse(new URL(typedUrl) , 10000);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return page;
     }
-
-    /**
-     * <b>Элементы значений погоды и преобразовывает в Elements</b>
-     *
+    /**<b>Сборщик</b>
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
-     * @see GetWeather#tableWTH
      */
     private static Elements getVal() {
-        tableWTH = GetWeather.page.select("table[class=wt]").first();
+        private static Element tableWTH;
+        tableWTH = GetWeather.getPage().select("table[class=wt]").first();
         return tableWTH.select("tr[valign=top]");
     }
 
@@ -104,6 +88,7 @@ public class GetWeather {
      * @since Метод за версией 0.171129.3
      */
     public static void main() throws IOException {
+
     }
 
     /**
@@ -123,7 +108,7 @@ public class GetWeather {
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
      * @since Метод за версией 0.171130.2
      */
-    public static int showSPBvalues( Elements values , int index ) {
+    static int showSPBvalues( Elements values , int index ) {
         Element valueLn = values.get(3); // берем элемент 3 из полученного массива
         int chandedIndex = values.size();
         for (Element elementIndexed : values) {
