@@ -1,4 +1,4 @@
-package ru.vachok.gui;
+package ru.vachok.spb.gui;
 
 import java.awt.*;
 import java.awt.event.*;
