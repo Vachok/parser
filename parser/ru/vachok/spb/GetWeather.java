@@ -15,14 +15,17 @@ import java.util.regex.Pattern;
  *
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.171130.4
+ * @version 0.171130.5
  * @since 30 ноября 2017
  */
 public class GetWeather {
     /**<b>Для получения кода страницы</b>
-     *@return */
-    private static Document getPage(String url) {
-        String typedUrl = url;
+     *@return исходный код */
+
+    private static Document page;
+    private static Element tableWTH;
+    private static Document getPage() {
+        String typedUrl = "http://pogoda.spb.ru";
         try {
             Jsoup.parse(new URL(typedUrl) , 10000);
         } catch (IOException e) {
@@ -34,8 +37,7 @@ public class GetWeather {
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
     private static Elements getVal() {
-        private static Element tableWTH;
-        tableWTH = GetWeather.getPage().select("table[class=wt]").first();
+        tableWTH = GetWeather.page.select("table[class=wt]").first();
         return tableWTH.select("tr[valign=top]");
     }
 
@@ -88,6 +90,8 @@ public class GetWeather {
      * @since Метод за версией 0.171129.3
      */
     public static void main() throws IOException {
+        Elements values = getVal();
+        showSPBvalues(values, 0);
 
     }
 

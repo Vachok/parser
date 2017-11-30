@@ -17,6 +17,7 @@ package ru.vachok.spb;
  */
 class Main {
     public static void main( String[] args ) throws Exception {
+        GetWeather.main();
         System.out.println("Заебцом");
     }
 }
