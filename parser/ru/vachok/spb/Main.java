@@ -4,8 +4,6 @@
 
 package ru.vachok.spb;
 
-import java.io.IOException;
-
 /**Вывод:
  * <p>Утро
  <p>Пасмурно. Небольшой снег. Метель.
@@ -18,7 +16,7 @@ import java.io.IOException;
  @since 0.171129.3
  */
 class Main {
-    public static void main( String[] args ) throws IOException {
+    public static void main( String[] args ) {
         GetWeather.main();
         System.out.println("Заебцом");
     }

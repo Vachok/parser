@@ -63,7 +63,7 @@ class GetWeather {
      * @return <p style="font-size:1em; color:blue;">date: "01.12"(example)</p>
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
-     static String dateGet() {
+     private static String dateGet() {
         Elements names;
          names = getVal();
          String date = null;
@@ -84,9 +84,10 @@ class GetWeather {
      */
     static void main() {
         System.out.println(dateGet());
-        int index = (4 + 6);
         Elements values = getVal();
-        showSPBvalues(values, index);
+        int i = 10;
+        i = showSPBvalues(values, i);
+        System.out.println(i);
     }
     /**
      * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
@@ -107,7 +108,6 @@ class GetWeather {
      */
     static int showSPBvalues( Elements values , int index ) {
         Element valueLn = values.get(3);
-        int chandedIndex = (values.size() - index);
         int iterationCount = 4;
             boolean isMorning = valueLn.text().contains("Утро");
             boolean isDay = valueLn.text().contains("День");
@@ -130,6 +130,6 @@ class GetWeather {
                         }
                     }
             }
-        return chandedIndex;
+        return values.size() + index;
     }
 }

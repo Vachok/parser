@@ -1,46 +1,15 @@
-"C:\Program Files\Java\jdk-9.0.1\bin\java" -javaagent:C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\idea_rt.jar=53591:C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\bin -Dfile.encoding=UTF-8 -classpath C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\plugins\uiDesigner\lib\uiDesigner.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\util.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\trove4j.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\snappy-in-java-0.5.1.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\resources_en.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\oromatcher.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\openapi.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\log4j.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\jna.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\jna-platform.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\jgoodies-forms.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\jdom.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\javac2.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\idea.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\forms_rt.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\extensions.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\annotations.jar;C:\Weather_Java\out\production\Weather;C:\Weather_Java\parser\ru\vachok\spb\res\lib\jsoup-1.11.2.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\junit.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\redist\annotations-java8.jar com.intellij.uiDesigner.snapShooter.SnapShooter 5 53590 ru.vachok.spb.Main
-SnapShooter listening on port 53590
-null
-Вечер
-Пасмурно. Без существенных осадков.
+"C:\Program Files\Java\jdk-9.0.1\bin\java" -javaagent:C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\idea_rt.jar=54626:C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\bin -Dfile.encoding=UTF-8 -classpath C:\Weather_Java\out\production\Weather;C:\Weather_Java\parser\ru\vachok\spb\res\lib\jsoup-1.11.2.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\lib\junit.jar;C:\Users\Vachok\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\173.3727.127\redist\annotations-java8.jar ru.vachok.spb.Main
+
+Ночь
+Облачно. Без осадков.
 -1..+1
 760
-89%
-[Ю] 2-4 м/с
-Вечер
-Пасмурно. Без существенных осадков.
--1..+1
-760
-89%
-[Ю] 2-4 м/с
-Ночь
-Пасмурно. Без осадков.
--1..+1
-761
-92%
-[Ю-В] 2-4 м/с
-Ночь
-Пасмурно. Без осадков.
--1..+1
-761
-92%
+91%
 [Ю-В] 2-4 м/с
 Утро
 Пасмурно. Без существенных осадков.
 -1..+1
 756
-88%
-[В] 4-6 м/с
-Утро
-Пасмурно. Без существенных осадков.
--1..+1
-756
-88%
-[В] 4-6 м/с
-День
-Пасмурно. Небольшой дождь, мокрый снег.
-+1..+3
-751
 87%
 [В] 4-6 м/с
 День
@@ -48,175 +17,116 @@ null
 +1..+3
 751
 87%
-[В] 4-6 м/с
+[Ю-В] 4-6 м/с
 Вечер
 Пасмурно. Небольшой дождь, мокрый снег.
-+1..+3
-749
-96%
-[Ю] 2-4 м/с
-Вечер
-Пасмурно. Небольшой дождь, мокрый снег.
-+1..+3
++2..+4
 749
 96%
 [Ю] 2-4 м/с
 Ночь
-Облачно. Без существенных осадков.
+Пасмурно. Местами небольшой дождь.
 0..+2
 750
 92%
-[Ю] 3-5 м/с
+[Ю] 2-4 м/с
+Утро
+Облачно. Местами небольшой дождь.
+0..+2
+752
+95%
+[Ю-З] 3-5 м/с
+День
+Пасмурно. Без существенных осадков.
+-1..+1
+757
+86%
+[З] 3-5 м/с
+Вечер
+Переменная облачность Без осадков.
+0..-2
+758
+89%
+[Ю-З] 4-6 м/с
 Ночь
-Облачно. Без существенных осадков.
+Облачно. Без осадков.
 0..+2
-750
-92%
-[Ю] 3-5 м/с
+758
+89%
+[Ю-З] 4-6 м/с
+Утро
+Пасмурно. Без осадков.
+0..+2
+757
+89%
+[Ю-З] 4-6 м/с
+День
+Пасмурно. Без осадков.
+0..+2
+754
+90%
+[Ю-З] 4-6 м/с
+Вечер
+Пасмурно. Без осадков.
+-1..+1
+751
+89%
+[Ю] 5-7 м/с
+Ночь
+Пасмурно. Небольшой дождь.
+-1..+1
+748
+89%
+[Ю-З] 4-6 м/с
 Утро
 Пасмурно. Местами небольшой дождь.
 0..+2
-753
-93%
-[З] 3-5 м/с
-Утро
-Пасмурно. Местами небольшой дождь.
-0..+2
-753
-93%
-[З] 3-5 м/с
-День
-Пасмурно. Без осадков.
--1..+1
-757
-88%
-[З] 2-4 м/с
-День
-Пасмурно. Без осадков.
--1..+1
-757
-88%
-[З] 2-4 м/с
-Вечер
-Облачно. Без осадков.
-0..-2
-759
+747
 89%
 [Ю-З] 3-5 м/с
-Вечер
-Облачно. Без осадков.
-0..-2
-759
-89%
-[Ю-З] 3-5 м/с
-Ночь
-Облачно. Без осадков.
-0..+2
-759
-90%
-[Ю-З] 3-5 м/с
-Ночь
-Облачно. Без осадков.
-0..+2
-759
-90%
-[Ю-З] 3-5 м/с
-Утро
-Облачно. Без осадков.
--1..+1
-758
-92%
-[Ю-З] 3-5 м/с
-Утро
-Облачно. Без осадков.
--1..+1
-758
-92%
-[Ю-З] 3-5 м/с
 День
-Пасмурно. Без осадков.
-0..+2
-756
-90%
-[Ю-З] 3-5 м/с
-День
-Пасмурно. Без осадков.
-0..+2
-756
-90%
-[Ю-З] 3-5 м/с
-Вечер
-Пасмурно. Без осадков.
+Облачно. Местами небольшой дождь.
 -1..+1
-753
-90%
-[Ю] 3-5 м/с
-Вечер
-Пасмурно. Без осадков.
--1..+1
-753
-90%
-[Ю] 3-5 м/с
-Ночь
-Пасмурно. Без осадков.
-0..-2
-750
-88%
-[Ю] 4-6 м/с
-Ночь
-Пасмурно. Без осадков.
-0..-2
-750
-88%
-[Ю] 4-6 м/с
-Утро
-Пасмурно. Местами небольшой снег.
-0..-2
 747
-87%
-[Ю] 4-6 м/с
-Утро
-Пасмурно. Местами небольшой снег.
+94%
+[Ю] 2-4 м/с
+Вечер
+Облачно. Без существенных осадков.
 0..-2
-747
-87%
-[Ю] 4-6 м/с
-День
+746
+96%
+[Ю] 1-3 м/с
+Ночь
 Пасмурно. Местами небольшой снег.
 -1..+1
 746
-89%
-[Ю] 3-5 м/с
+95%
+[С-З] 2-4 м/с
+Утро
+Пасмурно. Без существенных осадков.
+-2..-4
+747
+88%
+[С-З] 2-4 м/с
 День
-Пасмурно. Местами небольшой снег.
--1..+1
-746
+Пасмурно. Без существенных осадков.
+-2..-4
+749
+86%
+[С-З] 3-5 м/с
+Вечер
+Облачно. Без осадков.
+-3..-5
+750
 89%
-[Ю] 3-5 м/с
-Вечер
-Пасмурно. Без существенных осадков.
-0..-2
-745
-93%
-[Ю] 1-3 м/с
-Вечер
-Пасмурно. Без существенных осадков.
-0..-2
-745
-93%
-[Ю] 1-3 м/с
+[С-З] 1-3 м/с
 Ночь
-Облачно. Без существенных осадков.
--1..+1
-744
-95%
-[З] 1-3 м/с
-Ночь
-Облачно. Без существенных осадков.
--1..+1
-744
-95%
-[З] 1-3 м/с
+Облачно. Без осадков.
+-5..-7
+751
+90%
+[С-З] 0-2 м/с
+31
 Заебцом
 
 Process finished with exit code 0
