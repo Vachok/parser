@@ -90,11 +90,13 @@ class GetWeather {
      * @since Метод за версией 0.171129.3
      */
     static void main(){
-        int i = getVal().size();
-        int index = 1 + i;
+        int index = 1;
+        index = index++;
         Elements values = getVal();
         showSPBvalues(values, index);
     }
+
+
     /**
      * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
      * <p><b>index</b> инициализация переменной индекса массива;
@@ -113,9 +115,9 @@ class GetWeather {
      * @since Метод за версией 0.171130.2
      */
     private static int showSPBvalues( Elements values , int index ) {
-        Element valueLn = values.get(3); // берем элемент 3 из полученного массива
-        int chandedIndex = values.size();
-            int iterationCount = 4;
+        Element valueLn = values.get(3);
+        int chandedIndex = (values.size() + index);
+        int iterationCount = 4;
             boolean isMorning = valueLn.text().contains("Утро");
             boolean isDay = valueLn.text().contains("День");
             boolean isEvening = valueLn.text().contains("Вечер");
@@ -123,19 +125,19 @@ class GetWeather {
             if (isDay) iterationCount = 2;
             if (isEvening) iterationCount = 1;
             if (iterationCount == 4) {
-                for (Element elementIndexed : values){
-                for (int a = 0; a < iterationCount; a++) {
-                    for (Element elementTd : elementIndexed.select("td")) {
-                        System.out.println(elementTd.text());}
-                    }
-                }
-            } else {
-                for (Element elementIndexed : values){
+                for (Element elementIndexed : values.get(chandedIndex))
                     for (int a = 0; a < iterationCount; a++) {
-                    for (Element elementTd : elementIndexed.select("td")) {
-                        System.out.println(elementTd.text());}
+                        for (Element elementTd : elementIndexed.select("td")) {
+                            System.out.println(elementTd.text());
+                        }
                     }
-                }
+            } else {
+                for (Element elementIndexed : values)
+                    for (int a = 0; a < iterationCount; a++) {
+                        for (Element elementTd : elementIndexed.select("td")) {
+                            System.out.println(elementTd.text());
+                        }
+                    }
             }
         return chandedIndex;
     }
