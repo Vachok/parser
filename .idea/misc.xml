@@ -2,8 +2,7 @@
 <project version="4">
   <component name="EntryPointsManager">
     <pattern value="ru.vachok.gui.main" method="main" />
-    <pattern value="ru.vachok.spb.GetWeather" method="printVal" />
-    <pattern value="ru.vachok.spb.GetWeather" />
+    <pattern value="ru.vachok.spb.GetWeather" method="getVal" />
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/Docs" />
