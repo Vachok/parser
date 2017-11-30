@@ -18,16 +18,18 @@ import java.util.regex.Pattern;
  * @version 0.171130.5
  * @since 30 ноября 2017
  */
-public class GetWeather {
-    /**<b>Для получения кода страницы</b>
-     *@return исходный код */
+class GetWeather {
+    private static Elements tableTrVtop;
+    private static Document page = getPage();
 
-    private static Document page;
-    private static Element tableWTH;
+    /**
+     * <b>Для получения кода страницы</b>
+     */
     private static Document getPage() {
         String typedUrl = "http://pogoda.spb.ru";
+        Document page = null;
         try {
-            Jsoup.parse(new URL(typedUrl) , 10000);
+            page = Jsoup.parse(new URL(typedUrl) , 10000);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,9 +38,10 @@ public class GetWeather {
     /**<b>Сборщик</b>
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
-    private static Elements getVal() {
-        tableWTH = GetWeather.page.select("table[class=wt]").first();
-        return tableWTH.select("tr[valign=top]");
+    private static Elements getVal()  {
+         Element tablewtFirst = getPage().select("table[class=wt]").first();
+         Elements tableTrVtop = tablewtFirst.select("tr[valign=top]");
+        return tableTrVtop;
     }
 
     /**
@@ -67,9 +70,7 @@ public class GetWeather {
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
     private static String dateGet() throws IOException {
-        Document page = getPage();
-        tableWTH = page != null ? page.select("table[class=wt]").first() : null;
-        Elements names = tableWTH != null ? tableWTH.select("tr[class=wth]") : null;
+        Elements names = getVal() != null ? tableTrVtop.select("tr[class=wth]") : null;
         String date = null;
         assert names != null;
         for (Element name : names) {
@@ -86,14 +87,14 @@ public class GetWeather {
      * @see GetWeather#dateGet() <p style="font-size:1em; color:blue;">Вывод даты</p>
      * @see GetWeather#getVal() <p style="font-size:1em; color:blue;">Элементы</p>
      * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
-     * @see GetWeather#tableWTH
      * @since Метод за версией 0.171129.3
      */
-    public static void main() throws IOException {
+    static void main(){ //throws IOException {
+        int index = 1 + 9;
         Elements values = getVal();
-        showSPBvalues(values, 0);
-
+        showSPBvalues(values, index);
     }
+//        throw new IOException("Sorry, ERRRRRRRRRRR");
 
     /**
      * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
@@ -107,12 +108,12 @@ public class GetWeather {
      * <b>td.text</b> - текст из <b>td</b> , который содержит нужные нам значения!</p>
      * <p><i>values 19 iter 4</i> (число из вызывающего метода. Его можно засунуть в метод, как переменную)</p>
      *
-     * @param values кидаем в метод массив отобранный из {@link GetWeather#tableWTH}.
+     * @param values кидаем в метод массив отобранный из.
      * @param index  индекс элемента из массива values
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
      * @since Метод за версией 0.171130.2
      */
-    static int showSPBvalues( Elements values , int index ) {
+    private static void showSPBvalues( Elements values , int index ) {
         Element valueLn = values.get(3); // берем элемент 3 из полученного массива
         int chandedIndex = values.size();
         for (Element elementIndexed : values) {
@@ -137,6 +138,5 @@ public class GetWeather {
                 }
             }
         }
-        return chandedIndex;
     }
 }

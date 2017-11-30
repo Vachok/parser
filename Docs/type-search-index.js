@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"ru.vachok.spb","l":"GetWeather"},{"p":"ru.vachok","l":"Main"}]
+typeSearchIndex = [{"p":"ru.vachok.spb","l":"GetWeather"},{"p":"<Unnamed>","l":"Main"},{"p":"ru.vachok.spb","l":"Main"},{"p":"ru.vachok.spb.gui","l":"SimpleGUI"},{"p":"ru.vachok.spb.gui","l":"SimpleGUI.ButtonEventListener"}]
