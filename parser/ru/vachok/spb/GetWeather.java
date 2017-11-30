@@ -4,8 +4,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +38,7 @@ class GetWeather {
     /**<b>Сборщик</b>
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
-    private static Elements getVal() throws MalformedURLException {
+    private static Elements getVal()  {
          Element tablewtFirst = getPage().select("table[class=wt]").first();
          Elements tableTrVtop = tablewtFirst.select("tr[valign=top]");
         return tableTrVtop;
@@ -89,12 +89,12 @@ class GetWeather {
      * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
      * @since Метод за версией 0.171129.3
      */
-    static void main() throws IOException {
+    static void main(){ //throws IOException {
         int index = 1 + 9;
         Elements values = getVal();
         showSPBvalues(values, index);
-        throw new IOException("Sorry, ERRRRRRRRRRR");
     }
+//        throw new IOException("Sorry, ERRRRRRRRRRR");
 
     /**
      * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
