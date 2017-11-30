@@ -1,10 +1,13 @@
-/**@since 0.171129.5*/
 package ru.vachok.spb.gui;
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+/**
+ * @since 0.171129.5
+ */
 class SimpleGUI extends JFrame {
     private final JTextField input = new JTextField("" , 5);
     private final JRadioButton radio1 = new JRadioButton("Выбери меня");

@@ -18,26 +18,25 @@ import java.util.regex.Pattern;
  * @version 0.171130.5
  * @since 30 ноября 2017
  */
-public class GetWeather {
-    /**<b>Для получения кода страницы</b>
-     *@return исходный код */
+class GetWeather {
+    private static Document page = null;
 
-    private static Document page;
-    private static Element tableWTH;
-    private static Document getPage() {
+    /**<b>Для получения кода страницы</b>
+     */
+    private static Document getPage() throws IOException {
         String typedUrl = "http://pogoda.spb.ru";
         try {
             Jsoup.parse(new URL(typedUrl) , 10000);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        return page;
+        } throw new IOException("no date");
     }
+    private static Element tableWTH = page != null ? page.select("table[class=wt]").first() : null;
+
     /**<b>Сборщик</b>
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
     private static Elements getVal() {
-        tableWTH = GetWeather.page.select("table[class=wt]").first();
         return tableWTH.select("tr[valign=top]");
     }
 
@@ -68,7 +67,6 @@ public class GetWeather {
      */
     private static String dateGet() throws IOException {
         Document page = getPage();
-        tableWTH = page != null ? page.select("table[class=wt]").first() : null;
         Elements names = tableWTH != null ? tableWTH.select("tr[class=wth]") : null;
         String date = null;
         assert names != null;
@@ -90,9 +88,10 @@ public class GetWeather {
      * @since Метод за версией 0.171129.3
      */
     public static void main() throws IOException {
+        int index = 1 + 9;
         Elements values = getVal();
-        showSPBvalues(values, 0);
-
+        showSPBvalues(values, index);
+        throw new IOException("Sorry, ERRRRRRRRRRR");
     }
 
     /**
@@ -112,7 +111,7 @@ public class GetWeather {
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
      * @since Метод за версией 0.171130.2
      */
-    static int showSPBvalues( Elements values , int index ) {
+    private static void showSPBvalues( Elements values , int index ) {
         Element valueLn = values.get(3); // берем элемент 3 из полученного массива
         int chandedIndex = values.size();
         for (Element elementIndexed : values) {
@@ -137,6 +136,5 @@ public class GetWeather {
                 }
             }
         }
-        return chandedIndex;
     }
 }
