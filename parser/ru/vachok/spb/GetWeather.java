@@ -19,17 +19,15 @@ import java.util.regex.Pattern;
  * @since 30 ноября 2017
  */
 class GetWeather {
-    private static Elements tableTrVtop;
+    private static Elements tableTrVtop = getVal();
     private static Document page = getPage();
-
     /**
      * <b>Для получения кода страницы</b>
      */
     private static Document getPage() {
         String typedUrl = "http://pogoda.spb.ru";
-        Document page = null;
         try {
-            page = Jsoup.parse(new URL(typedUrl) , 10000);
+            return Jsoup.parse(new URL(typedUrl) , 10000);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,8 +88,7 @@ class GetWeather {
      * @since Метод за версией 0.171129.3
      */
     static void main(){
-        int index = 1;
-        index = index++;
+        int index = (4 + 6);
         Elements values = getVal();
         showSPBvalues(values, index);
     }
@@ -114,9 +111,9 @@ class GetWeather {
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
      * @since Метод за версией 0.171130.2
      */
-    private static int showSPBvalues( Elements values , int index ) {
+    static int showSPBvalues( Elements values , int index ) {
         Element valueLn = values.get(3);
-        int chandedIndex = (values.size() + index);
+        int chandedIndex = (values.size() - index);
         int iterationCount = 4;
             boolean isMorning = valueLn.text().contains("Утро");
             boolean isDay = valueLn.text().contains("День");
@@ -125,7 +122,7 @@ class GetWeather {
             if (isDay) iterationCount = 2;
             if (isEvening) iterationCount = 1;
             if (iterationCount == 4) {
-                for (Element elementIndexed : values.get(chandedIndex))
+                for (Element elementIndexed : values)
                     for (int a = 0; a < iterationCount; a++) {
                         for (Element elementTd : elementIndexed.select("td")) {
                             System.out.println(elementTd.text());
@@ -141,5 +138,4 @@ class GetWeather {
             }
         return chandedIndex;
     }
-
 }
