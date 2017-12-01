@@ -1,5 +1,3 @@
-package ru.vachok.spb;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,8 +16,8 @@ import java.util.regex.Pattern;
  * @version 0.171130.6
  * @since 30 ноября 2017
  */
-class GetWeather {
-    static Elements values = getVal();
+public class GetSPBWeather {
+    public static Elements values = getVal();
     /**
      * <b>Для получения кода страницы</b>
      */
@@ -85,12 +83,6 @@ class GetWeather {
      * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
      * @since Метод за версией 0.171129.3
      */
-    static void main() throws IOException {
-        int i = 10;
-        i = showSPBvalues(values , i);
-        System.out.println(i);
-        System.out.println(dateGet());
-    }
     /**
      * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
      * <p><b>index</b> инициализация переменной индекса массива;
@@ -108,7 +100,7 @@ class GetWeather {
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
      * @since Метод за версией 0.171130.2
      */
-    static int showSPBvalues( Elements values , int index ) {
+    static int showSPBvalues( Elements values , int index  ) {
         Element valueLn = values.get(3);
         int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
@@ -124,7 +116,8 @@ class GetWeather {
                         System.out.println(elementTd.text());
                     }
                 }
-        } else {
+        }
+        else {
             for (Element elementIndexed : values)
                 for (int a = 0; a < iterationCount; a++) {
                     for (Element elementTd : elementIndexed.select("td")) {
@@ -132,6 +125,6 @@ class GetWeather {
                     }
                 }
         }
-        return values.size() + index;
+        return iterationCount;
     }
 }

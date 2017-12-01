@@ -1,7 +1,11 @@
 class Main {
 
+
+
     public static void main( String[] args ) {
-        GetWeather.main();
+        i = GetSPBWeather.showSPBvalues(GetSPBWeather.values, i);
+        System.out.println(i);
+        i++;
 
     }
 
