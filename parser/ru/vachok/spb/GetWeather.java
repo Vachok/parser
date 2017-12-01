@@ -32,11 +32,13 @@ class GetWeather {
         }
         return page;
     }
-    /**<b>Сборщик</b>
+    /**
+     * <b>Сборщик</b>
+     *
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
-    private static Elements getVal()  {
-         Element tablewtFirst = getPage().select("table[class=wt]").first();
+    private static Elements getVal() {
+        Element tablewtFirst = getPage().select("table[class=wt]").first();
         return tablewtFirst.select("tr[valign=top]");
     }
     /**
@@ -56,17 +58,18 @@ class GetWeather {
             return matcher.group();
         }
         new IOException("no date");
-    return stringDate;}
+        return stringDate;
+    }
     /**
      * <b>Дата из массива </b>
      *
      * @return <p style="font-size:1em; color:blue;">date: "01.12"(example)</p>
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
-     private static String dateGet() {
+    private static String dateGet() {
         Elements names;
-         names = getVal();
-         String date = null;
+        names = getVal();
+        String date = null;
         for (Element name : names) {
             String stdate = getDateFrom(name.select("th[id=dt]").text());
             date = getDateFrom(stdate);
@@ -86,7 +89,7 @@ class GetWeather {
         System.out.println(dateGet());
         Elements values = getVal();
         int i = 10;
-        i = showSPBvalues(values, i);
+        i = showSPBvalues(values , i);
         System.out.println(i);
     }
     /**
@@ -109,27 +112,27 @@ class GetWeather {
     static int showSPBvalues( Elements values , int index ) {
         Element valueLn = values.get(3);
         int iterationCount = 4;
-            boolean isMorning = valueLn.text().contains("Утро");
-            boolean isDay = valueLn.text().contains("День");
-            boolean isEvening = valueLn.text().contains("Вечер");
-            if (isMorning) iterationCount = 3;
-            if (isDay) iterationCount = 2;
-            if (isEvening) iterationCount = 1;
-            if (iterationCount == 4) {
-                for (Element elementIndexed : values)
-                    for (int a = 0; a < iterationCount; a++) {
-                        for (Element elementTd : elementIndexed.select("td")) {
-                            System.out.println(elementTd.text());
-                        }
+        boolean isMorning = valueLn.text().contains("Утро");
+        boolean isDay = valueLn.text().contains("День");
+        boolean isEvening = valueLn.text().contains("Вечер");
+        if (isMorning) iterationCount = 3;
+        if (isDay) iterationCount = 2;
+        if (isEvening) iterationCount = 1;
+        if (iterationCount == 4) {
+            for (Element elementIndexed : values)
+                for (int a = 0; a < iterationCount; a++) {
+                    for (Element elementTd : elementIndexed.select("td")) {
+                        System.out.println(elementTd.text());
                     }
-            } else {
-                for (Element elementIndexed : values)
-                    for (int a = 0; a < iterationCount; a++) {
-                        for (Element elementTd : elementIndexed.select("td")) {
-                            System.out.println(elementTd.text());
-                        }
+                }
+        } else {
+            for (Element elementIndexed : values)
+                for (int a = 0; a < iterationCount; a++) {
+                    for (Element elementTd : elementIndexed.select("td")) {
+                        System.out.println(elementTd.text());
                     }
-            }
+                }
+        }
         return values.size() + index;
     }
 }
