@@ -2,7 +2,11 @@
  * Vacok 2017.
  */
 
-package ru.vachok.spb;
+/*
+ * Vacok 2017.
+ */
+
+package getspbweather;
 
 import java.io.IOException;
 
@@ -17,7 +21,7 @@ import java.io.IOException;
  <p>Заебцом</p>
  @since 0.171129.3
  */
-class Main {
+public class Main {
     public static void main( String[] args ) throws IOException {
         GetWeather.main();
         System.out.println("Заебцом");

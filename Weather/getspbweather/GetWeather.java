@@ -1,4 +1,8 @@
-package ru.vachok.spb;
+/*
+ * Vacok 2017.
+ */
+
+package getspbweather;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
