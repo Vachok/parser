@@ -5,7 +5,6 @@ class Main {
     static String date;
 
     public static void main( String[] args )  {
-        ButtonEventListener;
         date = GetSPBWeather.dateGet();
         System.out.println(date);
         index = GetSPBWeather.showSPBvalues(GetSPBWeather.getTablefomCSS() , index);
