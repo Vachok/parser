@@ -9,6 +9,7 @@ public class GetSPBWeatherDia extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JTextArea textArea1;
 
     public GetSPBWeatherDia() {
         setContentPane(contentPane);
@@ -41,6 +42,28 @@ public class GetSPBWeatherDia extends JDialog {
                 onCancel();
             }
         } , KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE , 0) , JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        textArea1.addComponentListener(new ComponentAdapter() {
+            /**
+             * Invoked when the component's size changes.
+             *
+             * @param e
+             */
+            @Override
+            public void componentResized( ComponentEvent e ) {
+                super.componentResized(e);
+            }
+        });
+        buttonOK.addMouseListener(new MouseAdapter() {
+            /**
+             * {@inheritDoc}
+             *
+             * @param e
+             */
+            @Override
+            public void mouseClicked( MouseEvent e ) {
+                super.mouseClicked(e);
+            }
+        });
     }
 
     private void onOK() {

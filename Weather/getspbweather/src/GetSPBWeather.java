@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * @version 0.171130.9
  * @since 30 ноября 2017
  */
- class GetSPBWeather {
+public class GetSPBWeather {
      private static final Elements tableCSS = getTablefomCSS();
     /**
      * <b>Для получения кода страницы</b>
