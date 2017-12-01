@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @since 0.171129.5
@@ -30,7 +32,7 @@ public class SimpleGUI extends JFrame {
         container.add(radio2);
         container.add(check);
         JButton button = new JButton("Press");
-//        button.addActionListener(new ButtonEventListener());
+        button.addActionListener(new ButtonEventListener());
         container.add(button);
 
 
@@ -39,7 +41,6 @@ public class SimpleGUI extends JFrame {
     /**
      *
      */
-/*
     public class ButtonEventListener implements ButtonEventListener {
 
 
@@ -55,6 +56,5 @@ public class SimpleGUI extends JFrame {
         }
 
     }
-*/
 
 }
