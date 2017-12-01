@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
  * @since 30 ноября 2017
  */
  class GetSPBWeather {
+     private static Elements tableCSS = getTablefomCSS();
     /**
      * <b>Для получения кода страницы</b>
      */
@@ -65,7 +66,7 @@ import java.util.regex.Pattern;
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
     static String dateGet() throws IOException {
-        Elements names = getTablefomCSS();
+        Elements names = tableCSS;
         String date = null;
         for (Element name : names) {
             String stdate = getDateFrom(name.select("th[id=dt]").text());
@@ -80,10 +81,11 @@ import java.util.regex.Pattern;
      * @since Метод за версией 0.171201.3
      */
 
-    static int showSPBvalues( Elements values , int index  ) {
+    static int showSPBvalues( Elements values , int index  ) throws IOException {
         Element valueLn = values.get(3);
-        for (Element value : values) {
-            index = value.elementSiblingIndex();
+        for (int i = 0; i < values.size(); i++) {
+            index = i;
+            System.out.println(index + ">  " + "  ");
         }
         int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
@@ -96,7 +98,7 @@ import java.util.regex.Pattern;
             for (Element elementIndexed : values)
                 for (int a = 0; a < iterationCount; a++) {
                     for (Element elementTd : elementIndexed.select("td")) {
-                        System.out.println(elementTd.text());
+                        System.out.print(elementTd.text());
                     }
                 }
         }
@@ -104,13 +106,11 @@ import java.util.regex.Pattern;
             for (Element elementIndexed : values)
                 for (int a = 0; a < iterationCount; a++) {
                     for (Element elementTd : elementIndexed.select("td")) {
-//                        System.out.println("<---" + elementTd.siblingIndex() + "--->" );
-                        System.out.println(elementTd.text());
-                        System.out.println();
-                        System.out.println(">" + elementIndexed.elementSiblingIndex() + "<");
+                        System.out.print(elementTd.text() + " ");
                     }
-                }
+                }return iterationCount;
         }
-        return index;
+
+        return index - iterationCount;
     }
 }
