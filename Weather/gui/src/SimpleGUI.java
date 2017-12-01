@@ -1,7 +1,3 @@
-/*
- * Vacok 2017.
- */
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -47,7 +43,7 @@ public class SimpleGUI extends JFrame {
      */
     public class ButtonEventListener implements ActionListener {
 
-        public void actionPerformed( ActionEvent e ) {
+        public static void actionPerformed( ActionEvent e ) {
             String message = "";
             message += "Нажал на кнопку и...\n";
             message += "Это " + input.getText() + "\n";
