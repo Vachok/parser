@@ -1,4 +1,6 @@
-package ru.vachok.spb.gui;
+/*
+ * Vacok 2017.
+ */
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * @since 0.171129.5
  */
-class SimpleGUI extends JFrame {
+public class SimpleGUI extends JFrame {
     private final JTextField input = new JTextField("" , 5);
     private final JRadioButton radio1 = new JRadioButton("Выбери меня");
     private final JCheckBox check = new JCheckBox("Отметь" , false);
@@ -40,7 +42,11 @@ class SimpleGUI extends JFrame {
 
     }
 
-    class ButtonEventListener implements ActionListener {
+    /**
+     *
+     */
+    public class ButtonEventListener implements ActionListener {
+
         public void actionPerformed( ActionEvent e ) {
             String message = "";
             message += "Нажал на кнопку и...\n";
