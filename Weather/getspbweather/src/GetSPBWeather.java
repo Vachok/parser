@@ -1,5 +1,3 @@
-package ru.vachok.spb;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,7 +16,7 @@ import java.util.regex.Pattern;
  * @version 0.171130.6
  * @since 30 ноября 2017
  */
-class GetWeather {
+public class GetSPBWeather {
     static Elements values = getVal();
     /**
      * <b>Для получения кода страницы</b>
