@@ -85,31 +85,31 @@ import java.util.regex.Pattern;
         Element valueLn = values.get(3);
         for (int i = 0; i < values.size(); i++) {
             index = i;
-        }
-        int iterationCount = 4;
-        boolean isMorning = valueLn.text().contains("Утро");
-        boolean isDay = valueLn.text().contains("День");
-        boolean isEvening = valueLn.text().contains("Вечер");
-        if (isMorning) iterationCount = 3;
-        if (isDay) iterationCount = 2;
-        if (isEvening) iterationCount = 1;
-        if (iterationCount == 4) {
-            for (Element elementIndexed : values)
+            int iterationCount = 4;
+            boolean isMorning = valueLn.text().contains("Утро");
+            boolean isDay = valueLn.text().contains("День");
+            boolean isEvening = valueLn.text().contains("Вечер");
+            if (isMorning) iterationCount = 3;
+            if (isDay) iterationCount = 2;
+            if (isEvening) iterationCount = 1;
+            Element value = values.get(index);
+            if (iterationCount == 4) {
                 for (int a = 0; a < iterationCount; a++) {
-                    for (Element elementTd : elementIndexed.select("td")) {
+                    for (Element elementTd : value.select("td")) {
                         System.out.print(elementTd.text());
                     }
                 }
-        }
-        else {
-            for (Element elementIndexed : values)
-                for (int a = 0; a < iterationCount; a++) {
-                    for (Element elementTd : elementIndexed.select("td")) {
-                        System.out.print(elementTd.text() + " ");
-                    }
-                }return iterationCount;
-        }
+            }
 
-        return index - iterationCount;
+         else {
+                for (Element elementIndexed : values)
+                    for (int a = 0; a < iterationCount; a++) {
+                        for (Element elementTd : elementIndexed.select("td")) {
+                            System.out.print(elementTd.text() + " ");
+                        }
+                    }return iterationCount;
+            }
+        }
+        return index;
     }
 }
