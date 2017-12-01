@@ -41,9 +41,10 @@ public class SimpleGUI extends JFrame {
     /**
      *
      */
-    public static class ButtonEventListener implements ActionListener {
+    public class ButtonEventListener implements ButtonEventListener {
 
 
+        @Override
         public void actionPerformed( ActionEvent e ) {
             String message = "";
             message += "Нажал на кнопку и...\n";
