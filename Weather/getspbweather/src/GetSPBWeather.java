@@ -1,5 +1,3 @@
-package ru.vachok.spb;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
