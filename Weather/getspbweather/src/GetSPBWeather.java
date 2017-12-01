@@ -16,10 +16,7 @@ import java.util.regex.Pattern;
  * @version 0.171130.6
  * @since 30 ноября 2017
  */
-public class GetSPBWeather {
-    static Elements tablefomCSS = getTablefomCSS();
-    private static int index;
-
+ class GetSPBWeather {
     /**
      * <b>Для получения кода страницы</b>
      */
@@ -38,7 +35,7 @@ public class GetSPBWeather {
      *
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
-    private static Elements getTablefomCSS() {
+    static Elements getTablefomCSS() {
         Element tablewtFirst = getPage().select("table[class=wt]").first();
         return tablewtFirst.select("tr[valign=top]");
     }
@@ -76,15 +73,18 @@ public class GetSPBWeather {
         }
         return date;
     }
-
     /**
      * @param values кидаем в метод массив отобранный из.
      * @param index ??
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
      * @since Метод за версией 0.171201.3
      */
+
     static int showSPBvalues( Elements values , int index  ) {
         Element valueLn = values.get(3);
+        for (Element value : values) {
+            index = value.elementSiblingIndex();
+        }
         int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
         boolean isDay = valueLn.text().contains("День");
@@ -104,13 +104,13 @@ public class GetSPBWeather {
             for (Element elementIndexed : values)
                 for (int a = 0; a < iterationCount; a++) {
                     for (Element elementTd : elementIndexed.select("td")) {
-                        System.out.println("<---" + elementTd.siblingIndex() + "--->" );
+//                        System.out.println("<---" + elementTd.siblingIndex() + "--->" );
                         System.out.println(elementTd.text());
                         System.out.println();
-//                        System.out.println(">" + elementIndexed.elementSiblingIndex() + "<");
+                        System.out.println(">" + elementIndexed.elementSiblingIndex() + "<");
                     }
                 }
         }
-        return iterationCount;
+        return index;
     }
 }

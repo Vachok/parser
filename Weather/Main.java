@@ -2,14 +2,19 @@ import java.io.IOException;
 
 class Main {
 
-    static int i;
+
+    public static int i;
     static String date;
+
+    public static void setI( int i ) {
+        Main.i = i;
+    }
 
     public static void main( String[] args ) throws IOException {
         date = GetSPBWeather.dateGet();
                 System.out.println(date);
-        i = GetSPBWeather.showSPBvalues(GetSPBWeather.tablefomCSS , i);
-                i = 5-i;
+        i = GetSPBWeather.showSPBvalues(GetSPBWeather.getTablefomCSS() , i);
+                i = i + 5;
         System.out.println(i);
     }
 }
