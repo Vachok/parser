@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  *
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.171130.6
+ * @version 0.171130.9
  * @since 30 ноября 2017
  */
  class GetSPBWeather {
