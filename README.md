@@ -1,4 +1,5 @@
-Тренирока на базе урока https://youtu.be/sZgXUK5L3Ss
+Тренировка на базе урока https://youtu.be/sZgXUK5L3Ss
+Познаём что за что отвечает
 
 Для работы нужен org.jsoup
 https://jsoup.org/download
