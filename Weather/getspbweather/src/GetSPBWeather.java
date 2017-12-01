@@ -17,7 +17,9 @@ import java.util.regex.Pattern;
  * @since 30 ноября 2017
  */
 public class GetSPBWeather {
-    static Elements values = getVal();
+    static Elements tablefomCSS = getTablefomCSS();
+    private static int index;
+
     /**
      * <b>Для получения кода страницы</b>
      */
@@ -36,7 +38,7 @@ public class GetSPBWeather {
      *
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
-    private static Elements getVal() {
+    private static Elements getTablefomCSS() {
         Element tablewtFirst = getPage().select("table[class=wt]").first();
         return tablewtFirst.select("tr[valign=top]");
     }
@@ -56,7 +58,7 @@ public class GetSPBWeather {
         if (matcher.find()) {
             return matcher.group();
         }
-        new IOException("no date");
+        final IOException no_date = new IOException("no date");
         return stringDate;
     }
     /**
@@ -65,8 +67,8 @@ public class GetSPBWeather {
      * @return <p style="font-size:1em; color:blue;">date: "01.12"(example)</p>
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
-    private static String dateGet() throws IOException {
-        Elements names = getVal();
+    static String dateGet() throws IOException {
+        Elements names = getTablefomCSS();
         String date = null;
         for (Element name : names) {
             String stdate = getDateFrom(name.select("th[id=dt]").text());
@@ -74,31 +76,12 @@ public class GetSPBWeather {
         }
         return date;
     }
+
     /**
-     * <p style="font-size:2em; color:red;">Out</p>
-     *
-     * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
-     * @see GetWeather#dateGet() <p style="font-size:1em; color:blue;">Вывод даты</p>
-     * @see GetWeather#getVal() <p style="font-size:1em; color:blue;">Элементы</p>
-     * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
-     * @since Метод за версией 0.171129.3
-     */
-    /**
-     * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
-     * <p><b>index</b> инициализация переменной индекса массива;
-     * <p><b>valueLn</b> - элемент, который мы передаём на проверку (Утро / День / Вечер);
-     * <p><b>iterationCount</b> - это то, сколько раз пройтись по;
-     * <p><b>index</b> = 0;
-     * <p><b>i</b> переменная для подсчёта шагов;
-     * <p><b>valueTd</b> - элемент массива <b>values</b> , с индексом <b>index</b> +  <b>i</b>;
-     * <p><b>td</b> - это таблицы с тэгом <b>td</b> из <b>valueTd</b>;
-     * <b>td.text</b> - текст из <b>td</b> , который содержит нужные нам значения!</p>
-     * <p><i>values 19 iter 4</i> (число из вызывающего метода. Его можно засунуть в метод, как переменную)</p>
-     *
      * @param values кидаем в метод массив отобранный из.
-     * @param index  индекс элемента из массива values
+     * @param index ??
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
-     * @since Метод за версией 0.171130.2
+     * @since Метод за версией 0.171201.3
      */
     static int showSPBvalues( Elements values , int index  ) {
         Element valueLn = values.get(3);
@@ -121,7 +104,10 @@ public class GetSPBWeather {
             for (Element elementIndexed : values)
                 for (int a = 0; a < iterationCount; a++) {
                     for (Element elementTd : elementIndexed.select("td")) {
+                        System.out.println("<---" + elementTd.siblingIndex() + "--->" );
                         System.out.println(elementTd.text());
+                        System.out.println();
+//                        System.out.println(">" + elementIndexed.elementSiblingIndex() + "<");
                     }
                 }
         }
