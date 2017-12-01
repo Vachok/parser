@@ -85,7 +85,6 @@ import java.util.regex.Pattern;
         Element valueLn = values.get(3);
         for (int i = 0; i < values.size(); i++) {
             index = i;
-            System.out.println(index + ">  " + "  ");
         }
         int iterationCount = 4;
         boolean isMorning = valueLn.text().contains("Утро");
