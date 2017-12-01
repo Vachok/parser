@@ -2,7 +2,9 @@
  * Vacok 2017.
  */
 
-package getspbweather;
+/*
+ * Vacok 2017.
+ */
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,13 +41,15 @@ class GetWeather {
         }
         return page;
     }
-    /**<b>Сборщик</b>
+
+    /**
+     * <b>Сборщик</b>
+     *
      * @return <p style="font-size:1em; color:blue;">{@code tableWTH.select("tr[valign=top]")}</p>
      */
-    private static Elements getVal()  {
-         Element tablewtFirst = getPage().select("table[class=wt]").first();
-         Elements tableTrVtop = tablewtFirst.select("tr[valign=top]");
-        return tableTrVtop;
+    private static Elements getVal() {
+        Element tablewtFirst = getPage().select("table[class=wt]").first();
+        return tablewtFirst.select("tr[valign=top]");
     }
 
     /**
@@ -93,10 +97,10 @@ class GetWeather {
      * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
      * @since Метод за версией 0.171129.3
      */
-    static void main(){ //throws IOException {
+    static void main() { //throws IOException {
         int index = 1 + 9;
         Elements values = getVal();
-        showSPBvalues(values, index);
+        showSPBvalues(values , index);
     }
 //        throw new IOException("Sorry, ERRRRRRRRRRR");
 

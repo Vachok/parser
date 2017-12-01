@@ -1,4 +1,6 @@
-package gui;
+/*
+ * Vacok 2017.
+ */
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +46,6 @@ public class SimpleGUI extends JFrame {
      *
      */
     public class ButtonEventListener implements ActionListener {
-        public Object actionPerformed;
 
         public void actionPerformed( ActionEvent e ) {
             String message = "";
