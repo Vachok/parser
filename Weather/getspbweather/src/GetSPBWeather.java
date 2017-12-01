@@ -45,7 +45,6 @@ import java.util.regex.Pattern;
      *
      * @param stringDate <i style="font-size:1em; color:blue;">(example) "27.11 Понедельник погода сегодня"</i>
      * @return <i style="font-size:1em; color:blue;">java.util.regex.Matcher[pattern=\d{2}\.\d{2} region=0,32 lastmatch=<b>27.11</b>]</i>
-     * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      * @since 0.171129.3
      */
     private static String getDateFrom( String stringDate ) {
