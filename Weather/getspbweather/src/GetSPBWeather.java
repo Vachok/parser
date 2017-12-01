@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * @since 30 ноября 2017
  */
  class GetSPBWeather {
-     private static Elements tableCSS = getTablefomCSS();
+     private static final Elements tableCSS = getTablefomCSS();
     /**
      * <b>Для получения кода страницы</b>
      */
@@ -48,7 +48,7 @@ import java.util.regex.Pattern;
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      * @since 0.171129.3
      */
-    private static String getDateFrom( String stringDate ) throws IOException {
+    private static String getDateFrom( String stringDate ) {
         Pattern pattern;
         pattern = Pattern.compile("\\d{2}\\.\\d{2}");
         Matcher matcher;
@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
         if (matcher.find()) {
             return matcher.group();
         }
-        final IOException no_date = new IOException("no date");
+         new IOException("no date");
         return stringDate;
     }
     /**
@@ -65,10 +65,9 @@ import java.util.regex.Pattern;
      * @return <p style="font-size:1em; color:blue;">date: "01.12"(example)</p>
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
-    static String dateGet() throws IOException {
-        Elements names = tableCSS;
+    static String dateGet() {
         String date = null;
-        for (Element name : names) {
+        for (Element name : tableCSS) {
             String stdate = getDateFrom(name.select("th[id=dt]").text());
             date = getDateFrom(stdate);
         }
@@ -81,7 +80,7 @@ import java.util.regex.Pattern;
      * @since Метод за версией 0.171201.3
      */
 
-    static int showSPBvalues( Elements values , int index  ) throws IOException {
+    static int showSPBvalues( Elements values , int index  ) {
         Element valueLn = values.get(3);
         for (int i = 0; i < values.size(); i++) {
             index = i;
