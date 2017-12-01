@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
  * @since 30 ноября 2017
  */
 class GetWeather {
+    static Elements values = getVal();
     /**
      * <b>Для получения кода страницы</b>
      */
@@ -49,7 +50,7 @@ class GetWeather {
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      * @since 0.171129.3
      */
-    private static String getDateFrom( String stringDate ) {
+    private static String getDateFrom( String stringDate ) throws IOException {
         Pattern pattern;
         pattern = Pattern.compile("\\d{2}\\.\\d{2}");
         Matcher matcher;
@@ -66,9 +67,8 @@ class GetWeather {
      * @return <p style="font-size:1em; color:blue;">date: "01.12"(example)</p>
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
-    private static String dateGet() {
-        Elements names;
-        names = getVal();
+    private static String dateGet() throws IOException {
+        Elements names = getVal();
         String date = null;
         for (Element name : names) {
             String stdate = getDateFrom(name.select("th[id=dt]").text());
@@ -85,12 +85,11 @@ class GetWeather {
      * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
      * @since Метод за версией 0.171129.3
      */
-    static void main() {
-        System.out.println(dateGet());
-        Elements values = getVal();
+    static void main() throws IOException {
         int i = 10;
         i = showSPBvalues(values , i);
         System.out.println(i);
+        System.out.println(dateGet());
     }
     /**
      * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
