@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ExternalDependencies">
     <plugin id="CVS" />
+    <plugin id="Git4Idea" />
     <plugin id="com.intellij.tasks" />
+    <plugin id="org.jetbrains.plugins.github" />
+    <plugin id="org.jetbrains.settingsRepository" />
   </component>
 </project>

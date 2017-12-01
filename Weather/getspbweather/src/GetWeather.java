@@ -1,10 +1,4 @@
-/*
- * Vacok 2017.
- */
-
-/*
- * Vacok 2017.
- */
+package ru.vachok.spb;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,27 +15,24 @@ import java.util.regex.Pattern;
  *
  * @author Vachok
  * Из урока на www.geekbrains.ru
- * @version 0.171130.5
+ * @version 0.171130.6
  * @since 30 ноября 2017
  */
 class GetWeather {
-    private static Elements tableTrVtop;
-    private static Document page = getPage();
-
+    static Elements values = getVal();
     /**
      * <b>Для получения кода страницы</b>
      */
     private static Document getPage() {
-        String typedUrl = "http://pogoda.spb.ru";
+        String url = "http://pogoda.spb.ru/";
         Document page = null;
         try {
-            page = Jsoup.parse(new URL(typedUrl) , 10000);
+            page = Jsoup.parse(new URL(url) , 10000);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return page;
     }
-
     /**
      * <b>Сборщик</b>
      *
@@ -51,7 +42,6 @@ class GetWeather {
         Element tablewtFirst = getPage().select("table[class=wt]").first();
         return tablewtFirst.select("tr[valign=top]");
     }
-
     /**
      * <b>Выделяет дату из <i>stringDate</i></b> <p>Берется строка stringDate, засовывается внутрь, проверяется Matcher"ом и отдаёт строку, в случае совпадения.</p>
      *
@@ -68,9 +58,9 @@ class GetWeather {
         if (matcher.find()) {
             return matcher.group();
         }
-        throw new IOException("no date");
+        new IOException("no date");
+        return stringDate;
     }
-
     /**
      * <b>Дата из массива </b>
      *
@@ -78,16 +68,14 @@ class GetWeather {
      * @throws IOException <i style="font-size:1em; color:blue;">no date</i>
      */
     private static String dateGet() throws IOException {
-        Elements names = getVal() != null ? tableTrVtop.select("tr[class=wth]") : null;
+        Elements names = getVal();
         String date = null;
-        assert names != null;
         for (Element name : names) {
             String stdate = getDateFrom(name.select("th[id=dt]").text());
             date = getDateFrom(stdate);
         }
         return date;
     }
-
     /**
      * <p style="font-size:2em; color:red;">Out</p>
      *
@@ -97,13 +85,12 @@ class GetWeather {
      * @see GetWeather#showSPBvalues(Elements , int) <p style="font-size:1em; color:blue;">Вывод значений</p>
      * @since Метод за версией 0.171129.3
      */
-    static void main() { //throws IOException {
-        int index = 1 + 9;
-        Elements values = getVal();
-        showSPBvalues(values , index);
+    static void main() throws IOException {
+        int i = 10;
+        i = showSPBvalues(values , i);
+        System.out.println(i);
+        System.out.println(dateGet());
     }
-//        throw new IOException("Sorry, ERRRRRRRRRRR");
-
     /**
      * <p style="font-size:2em; color:red;"><b>Метод вывода значений</b></p>
      * <p><b>index</b> инициализация переменной индекса массива;
@@ -121,30 +108,30 @@ class GetWeather {
      * @return <b style="font-size:2em; color:red;">что отдавать?</b>
      * @since Метод за версией 0.171130.2
      */
-    private static void showSPBvalues( Elements values , int index ) {
-        Element valueLn = values.get(3); // берем элемент 3 из полученного массива
-        int chandedIndex = values.size();
-        for (Element elementIndexed : values) {
-            int iterationCount = 4;
-            boolean isMorning = valueLn.text().contains("Утро");
-            boolean isDay = valueLn.text().contains("День");
-            boolean isEvening = valueLn.text().contains("Вечер");
-            if (isMorning) iterationCount = 3;
-            if (isDay) iterationCount = 2;
-            if (isEvening) iterationCount = 1;
-            if (iterationCount == 4) {
+    static int showSPBvalues( Elements values , int index ) {
+        Element valueLn = values.get(3);
+        int iterationCount = 4;
+        boolean isMorning = valueLn.text().contains("Утро");
+        boolean isDay = valueLn.text().contains("День");
+        boolean isEvening = valueLn.text().contains("Вечер");
+        if (isMorning) iterationCount = 3;
+        if (isDay) iterationCount = 2;
+        if (isEvening) iterationCount = 1;
+        if (iterationCount == 4) {
+            for (Element elementIndexed : values)
                 for (int a = 0; a < iterationCount; a++) {
                     for (Element elementTd : elementIndexed.select("td")) {
                         System.out.println(elementTd.text());
                     }
                 }
-            } else {
+        } else {
+            for (Element elementIndexed : values)
                 for (int a = 0; a < iterationCount; a++) {
                     for (Element elementTd : elementIndexed.select("td")) {
                         System.out.println(elementTd.text());
                     }
                 }
-            }
         }
+        return values.size() + index;
     }
 }
